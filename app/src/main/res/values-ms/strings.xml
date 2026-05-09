@@ -81,6 +81,10 @@
     <string name="password">Kata Laluan</string>
     <string name="remember_me">Ingat Saya</string>
     <string name="forgot_password">Lupa Kata Laluan?</string>
+    <string name="reset_password_title">Tetapkan Semula Kata Laluan</string>
+    <string name="reset_password_desc">Masukkan alamat e-mel anda untuk menerima pautan tetapan semula kata laluan.</string>
+    <string name="reset_email_sent">E-mel tetapan semula kata laluan telah dihantar</string>
+    <string name="enter_email">Sila masukkan e-mel anda</string>
     <string name="login_btn">LOG MASUK</string>
     <string name="no_account_prompt">Tiada akaun? Daftar sekarang</string>
     <string name="already_have_account">Sudah mempunyai akaun? Log masuk</string>

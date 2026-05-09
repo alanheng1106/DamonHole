@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.google.android.material.color.DynamicColors;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -16,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private Button btnLogin;
-    private TextView tvSignUp;
+    private TextView tvSignUp, tvForgotPassword;
     private FirebaseAuth mAuth;
 
     @Override
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvSignUp = findViewById(R.id.tvSignUpPrompt);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         btnLogin.setOnClickListener(v -> loginUser());
 
@@ -38,9 +41,47 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
 
+        tvForgotPassword.setOnClickListener(v -> showForgotPasswordDialog());
+
         findViewById(R.id.btnLanguage).setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, LanguageActivity.class));
         });
+    }
+
+    private void showForgotPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.reset_password_title);
+        builder.setMessage(R.string.reset_password_desc);
+
+        final EditText input = new EditText(this);
+        input.setHint(R.string.email);
+        input.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        
+        // Check if user already typed something in email field
+        String currentEmail = etEmail.getText().toString().trim();
+        if (!currentEmail.isEmpty()) {
+            input.setText(currentEmail);
+        }
+
+        builder.setView(input);
+
+        builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
+            String email = input.getText().toString().trim();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
+            } else {
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, R.string.reset_email_sent, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
+        builder.show();
     }
 
     private void loginUser() {
