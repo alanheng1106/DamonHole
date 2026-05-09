@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- M3: Playlist list item -->
+<!-- FrameLayout root lets btnPlayPlaylist sit as a sibling OVER the card,
+     so it gets touch events independently from the card's click area. -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="0dp"
+    android:layout_marginVertical="6dp">
+
+    <!-- The card handles the row click -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPlaylist"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="1dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="?attr/colorSurfaceVariant">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivPlaylistThumb"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_music_note"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+                android:background="?attr/colorPrimary"
+                android:padding="12dp"
+                app:tint="?attr/colorOnPrimary" />
+
+            <!-- Reserve space on the right so text doesn't go under the FAB -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/ivPlaylistThumb"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="52dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPlaylistName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/tvPlaylistDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:alpha="0.72"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Delete Button -->
+    <!-- Buttons Container -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="12dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnDeletePlaylist"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@null"
+            app:tint="#FF5252" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnPlayPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:fabSize="mini"
+            android:src="@drawable/ic_play"
+            app:backgroundTint="?attr/colorPrimaryContainer"
+            app:tint="?attr/colorOnPrimaryContainer"
+            app:elevation="4dp"
+            app:maxImageSize="20dp" />
+    </LinearLayout>
+
+</FrameLayout>

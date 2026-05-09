@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "595608121929",
+    "project_id": "fcp1302damonhole",
+    "storage_bucket": "fcp1302damonhole.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595608121929:android:5f1dd917d676c04075c598",
+        "android_client_info": {
+          "package_name": "com.example.damonhole"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLdDh3Q1YXdYHVT1FC00kY5EAkmJj8ZnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

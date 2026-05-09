@@ -1,0 +1,173 @@
+<resources>
+    <string name="welcome">Selamat Datang</string>
+    <string name="user_profile">Profil Pengguna</string>
+    <string name="change_password">Tukar Kata Laluan</string>
+    <string name="faqs">Soalan Lazim</string>
+    <string name="dark_mode">Mod Gelap</string>
+    <string name="change_language">Tukar Bahasa</string>
+    <string name="select_language">Pilih Bahasa</string>
+    <string name="lang_en_uk">Inggeris (UK)</string>
+    <string name="lang_zh_cn">Cina (Ringkas)</string>
+    <string name="lang_ms">Bahasa Melayu</string>
+    <string name="logout">Log Keluar</string>
+
+    <string name="good_morning">Selamat pagi!</string>
+    <string name="good_afternoon">Selamat tengah hari!</string>
+    <string name="good_evening">Selamat petang!</string>
+    <string name="good_night">Selamat malam!</string>
+    <string name="music_fan">Peminat Muzik</string>
+    <string name="search_hint">Cari muzik…</string>
+    <string name="all">Semua</string>
+    <string name="playlists">Senarai Main</string>
+    <string name="liked_songs">Lagu Disukai</string>
+    <string name="recent_hits">Hits Terkini</string>
+    <string name="create_new_playlist">Cipta Senarai Main Baru</string>
+
+    <string name="first_name">Nama Pertama</string>
+    <string name="last_name">Nama Keluarga</string>
+    <string name="email">E-Mel</string>
+    <string name="mobile">Telefon Bimbit</string>
+    <string name="save">SIMPAN</string>
+    <string name="current_password">Kata Laluan Semasa</string>
+    <string name="new_password">Kata Laluan Baru</string>
+    <string name="confirm_new_password">Sahkan Kata Laluan Baru</string>
+    <string name="change_password_success">Kata laluan berjaya dikemas kini!</string>
+    <string name="change_password_failed">Gagal mengemas kini kata laluan: %s</string>
+    <string name="password_mismatch">Kata laluan tidak sepadan</string>
+    <string name="password_empty">Sila isi semua medan</string>
+    <string name="update_password">KEMAS KINI KATA LALUAN</string>
+
+    <string name="now_playing">Sedang Dimainkan</string>
+    <string name="your_playlists">Senarai Main Anda</string>
+    <string name="songs_count">%d lagu</string>
+    <string name="playlist_details">Oleh %1$s • %2$d Lagu</string>
+    <string name="no_liked_songs">Tiada lagu disukai lagi.\nKetik ikon hati pada mana-mana lagu untuk menyimpannya di sini.</string>
+
+    <string name="nav_home">Utama</string>
+    <string name="nav_playlists">Senarai Main</string>
+    <string name="nav_now_playing">Main</string>
+    <string name="nav_settings">Tetapan</string>
+
+    <string name="back">Kembali</string>
+    <string name="create_playlist">Cipta Senarai Main</string>
+    <string name="not_playing">Tidak Dimainkan</string>
+    <string name="select_a_song">Pilih lagu</string>
+    <string name="play_pause">Main atau Jeda</string>
+    <string name="no_songs_in_playlist">Tiada lagu dalam senarai main ini</string>
+    <string name="default_user_name">Nama Pengguna</string>
+    <string name="default_email">demo@example.com</string>
+
+    <string name="searching">Mencari…</string>
+    <string name="search_results">Keputusan Carian</string>
+    <string name="search_failed">Carian gagal</string>
+    <string name="loading_song">Memuatkan %s…</string>
+    <string name="playlist_name">Nama Senarai Main</string>
+    <string name="enter_playlist_name">Masukkan nama senarai main</string>
+    <string name="create">Cipta</string>
+    <string name="cancel">Batal</string>
+    <string name="delete">Padam</string>
+    <string name="delete_playlist_title">Padam Senarai Main</string>
+    <string name="delete_playlist_confirm">Adakah anda pasti mahu memadam \"%s\"? Tindakan ini tidak boleh diubah.</string>
+    <string name="playlist_deleted">Senarai main dipadamkan</string>
+
+    <!-- Welcome / Pre-login -->
+    <string name="welcome_desc">Destinasi utama anda untuk penemuan muzik. Strim lagu kegemaran anda, cipta senarai main tersuai, dan nikmati pengalaman audio yang lancar di mana-mana sahaja, pada bila-bila masa.</string>
+    <string name="get_started">MULAKAN</string>
+    <string name="experience_music">Alami muzik seperti tidak pernah sebelum ini</string>
+    <string name="sign_in">Log masuk</string>
+    <string name="sign_up">Daftar</string>
+    <string name="password">Kata Laluan</string>
+    <string name="remember_me">Ingat Saya</string>
+    <string name="forgot_password">Lupa Kata Laluan?</string>
+    <string name="login_btn">LOG MASUK</string>
+    <string name="no_account_prompt">Tiada akaun? Daftar sekarang</string>
+    <string name="already_have_account">Sudah mempunyai akaun? Log masuk</string>
+    <string name="sign_up_btn">DAFTAR</string>
+
+    <string name="playlist_empty">Senarai main ini belum mempunyai lagu lagi</string>
+    <string name="player_not_ready">Pemain belum bersedia, cuba lagi</string>
+    <string name="playing_playlist">Bermain: %s</string>
+    <string name="clear_history">Padam Sejarah</string>
+    <string name="search_history">Sejarah Carian</string>
+    <string name="current_queue">Barisan Semasa</string>
+    <string name="queue_empty">Barisan anda kosong</string>
+    <string name="sort">Susun</string>
+    <string name="sort_by">Susun mengikut</string>
+    <string name="sort_title">Tajuk</string>
+    <string name="sort_artist">Artis</string>
+    <string name="sort_date">Tarikh Ditambah</string>
+
+    <!-- FAQ -->
+    <string name="faq_title">Soalan Lazim</string>
+    <string name="faq_subtitle">Kami di sini untuk membantu anda dengan apa sahaja di DamonHole</string>
+    <string name="faq_search_hint">Cari Bantuan</string>
+    <string name="faq_top_questions">Soalan Utama</string>
+
+    <string name="faq_cat_playback">Main Balik</string>
+    <string name="faq_cat_content">Kandungan</string>
+    <string name="faq_cat_playlists">Senarai Main</string>
+    <string name="faq_cat_general">Umum</string>
+
+    <string name="faq_q_bg_play">Bagaimanakah cara saya memainkan muzik di latar belakang?</string>
+    <string name="faq_a_bg_play">DamonHole direka untuk terus dimainkan walaupun anda keluar daripada aplikasi atau mematikan skrin anda. Hanya mulakan lagu dan anda sudah bersedia!</string>
+    <string name="faq_q_screen_off">Adakah ia berfungsi dengan skrin mati?</string>
+    <string name="faq_a_screen_off">Ya! Anda boleh mengunci telefon anda dan muzik akan terus dimainkan tanpa gangguan.</string>
+    <string name="faq_q_stop_unexpectedly">Mengapakah muzik berhenti secara tidak sengaja?</string>
+    <string name="faq_a_stop_unexpectedly">Ini biasanya disebabkan oleh pengoptimuman bateri. Sila pastikan DamonHole dikecualikan daripada \'Pengoptimuman Bateri\' dalam tetapan telefon anda.</string>
+
+    <string name="faq_q_is_free">Adakah ini benar-benar percuma?</string>
+    <string name="faq_a_is_free">Ya, DamonHole membolehkan anda menikmati muzik tanpa sebarang langganan premium.</string>
+    <string name="faq_q_source">Dari manakah datangnya muzik itu?</string>
+    <string name="faq_a_source">Aplikasi ini menstrim kandungan audio berkualiti tinggi daripada perpustakaan YouTube yang luas.</string>
+    <string name="faq_q_download">Bolehkah saya memuat turun lagu untuk kegunaan luar talian?</string>
+    <string name="faq_a_download">Pada masa ini, DamonHole memberi tumpuan kepada menyediakan pengalaman penstriman terbaik. Sokongan luar talian mungkin dipertimbangkan untuk kemas kini masa hadapan.</string>
+
+    <string name="faq_q_create_playlist">Bagaimanakah cara saya mencipta senarai main?</string>
+    <string name="faq_a_create_playlist">Pergi ke tab \'Senarai Main\' dan ketik butang \'+\' di bahagian atas untuk mencipta dan menamakan koleksi baharu anda.</string>
+    <string name="faq_q_add_to_playlist">Bagaimanakah cara saya menambah lagu ke senarai main?</string>
+    <string name="faq_a_add_to_playlist">Semasa mencari atau melihat lagu, ketik menu (tiga titik) di sebelah lagu dan pilih \'Tambah ke Senarai Main\'.</string>
+
+    <string name="faq_q_change_theme">Bagaimanakah cara saya menukar tema aplikasi?</string>
+    <string name="faq_a_change_theme">Pergi ke Tetapan dan gunakan suis \'Mod Gelap\' untuk beralih antara tema terang dan gelap.</string>
+    <string name="faq_q_audio_quality">Bolehkah saya menukar kualiti audio?</string>
+    <string name="faq_a_audio_quality">Aplikasi memilih kualiti terbaik secara automatik berdasarkan sambungan internet anda untuk memastikan main balik yang lancar.</string>
+    <string name="import_youtube_playlist">Import Senarai Main YouTube</string>
+    <string name="invalid_playlist_url">URL Senarai Main YouTube Tidak Sah</string>
+    <string name="fetching_playlist">Mengambil senarai main…</string>
+    <string name="imported_playlist_name">Senarai Main Diimport</string>
+    <string name="imported_songs_count">%d lagu telah diimport!</string>
+    <string name="no_songs_found">Tiada lagu sah ditemui dalam senarai main.</string>
+    <string name="import_failed">Gagal mengimport senarai main. Semak internet atau kunci API anda.</string>
+    <string name="import_hint">https://youtube.com/playlist?list=…</string>
+    <string name="action_import">Import</string>
+    <string name="system_eq_not_found">Ekualizer sistem tidak ditemui.</string>
+    <string name="creating_account">Mencipta akaun…</string>
+    <string name="registration_success">Berjaya! Sila log masuk.</string>
+    <string name="failed_load_profile">Gagal memuatkan profil</string>
+    <string name="updating_profile">Mengemas kini profil…</string>
+    <string name="profile_updated">Profil berjaya dikemas kini!</string>
+    <string name="liked_songs_updated">Lagu Disukai Dikemas Kini</string>
+    <string name="create_playlist_first">Cipta senarai main dahulu!</string>
+    <string name="login_success">Log masuk berjaya!</string>
+    <string name="auth_failed">Pengesahan gagal: %s</string>
+    <string name="user_not_signed_in">Pengguna tidak log masuk.</string>
+    <string name="email_required">E-mel diperlukan</string>
+    <string name="password_required">Kata laluan diperlukan</string>
+    <string name="first_name_required">Nama pertama diperlukan</string>
+    <string name="password_length_error">Kata laluan mestilah sekurang-kurangnya 6 aksara</string>
+    <string name="incorrect_password">Kata laluan semasa tidak betul</string>
+    <string name="me">Saya</string>
+    <string name="add_to_playlist">Tambah ke Senarai Main</string>
+    <string name="added_to_playlist">Ditambah ke %s</string>
+    <string name="unlike">Batal Suka</string>
+    <string name="like">Suka</string>
+    <string name="update_failed">Kemas kini gagal: %s</string>
+    <string name="removed_from_liked">Dikeluarkan daripada Lagu Disukai</string>
+    <string name="unknown">Tidak Diketahui</string>
+    <string name="add_menu">Menu Tambah</string>
+    <string name="added_to_liked">Ditambah ke Lagu Disukai</string>
+    <string name="sort_title_az">Tajuk (A-Z)</string>
+    <string name="sort_title_za">Tajuk (Z-A)</string>
+    <string name="built_with">Dibina dengan ❤️</string>
+    <string name="version_format">Versi %s</string>
+</resources>

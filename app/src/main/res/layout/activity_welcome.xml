@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- M3: Welcome / splash screen -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp"
+            android:paddingTop="96dp"
+            android:paddingBottom="48dp">
+
+            <!-- M3 Surface Container for icon -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginBottom="32dp"
+                app:cardCornerRadius="44dp"
+                app:cardBackgroundColor="?attr/colorPrimaryContainer"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/ic_music_note"
+                    android:padding="20dp"
+                    android:scaleType="centerInside"
+                    app:tint="?attr/colorOnPrimaryContainer"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- M3 Display typography -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAppearance="?attr/textAppearanceDisplayMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:fontFamily="sans-serif-black" />
+
+            <!-- M3 primary accent bar -->
+            <View
+                android:layout_width="56dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="28dp"
+                android:background="?attr/colorPrimary"
+                android:backgroundTint="?attr/colorPrimary" />
+
+            <!-- M3 Body typography -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/welcome_desc"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:lineSpacingMultiplier="1.5"
+                android:layout_marginBottom="64dp" />
+
+            <!-- M3 Filled button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/get_started"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:fontFamily="sans-serif-black"
+                app:cornerRadius="28dp"
+                app:icon="@drawable/ic_play"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp" />
+
+            <!-- M3 Label typography -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="@string/experience_music"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLanguage"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        app:icon="@drawable/ic_language"
+        app:iconTint="?attr/colorPrimary"
+        android:contentDescription="@string/select_language" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

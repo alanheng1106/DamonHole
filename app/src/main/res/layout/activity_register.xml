@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- M3: Register screen -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="80dp"
+            android:paddingBottom="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:textAppearance="?attr/textAppearanceHeadlineLarge"
+                android:textColor="?attr/colorOnSurface"
+                android:fontFamily="sans-serif-black" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:background="?attr/colorPrimary" />
+
+            <!-- First Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="@string/first_name"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="?attr/colorOnSurface"
+                    android:paddingVertical="18dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Last Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="@string/last_name"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="?attr/colorOnSurface"
+                    android:paddingVertical="18dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="@string/email"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:startIconDrawable="@drawable/ic_mail"
+                app:startIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="?attr/colorOnSurface"
+                    android:paddingVertical="18dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="36dp"
+                android:hint="@string/password"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="?attr/colorOnSurfaceVariant"
+                app:endIconMode="password_toggle"
+                app:endIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="?attr/colorOnSurface"
+                    android:paddingVertical="18dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegister"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/sign_up_btn"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:fontFamily="sans-serif-black"
+                app:cornerRadius="28dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvLoginPrompt"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/already_have_account"
+                android:textColor="?attr/colorPrimary" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLanguage"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:icon="@drawable/ic_language"
+        app:iconTint="?attr/colorPrimary"
+        android:contentDescription="@string/select_language" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

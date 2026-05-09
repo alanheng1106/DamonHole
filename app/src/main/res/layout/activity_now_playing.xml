@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- M3: Now Playing screen -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="48dp">
+
+        <!-- Artwork (no more CircularSeekBar wrapper) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivArtwork"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:background="?attr/colorSurfaceVariant"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_music_note"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:strokeWidth="0dp" />
+
+        </FrameLayout>
+
+        <!-- Song metadata -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textColor="?attr/colorOnSurface" />
+
+            <TextView
+                android:id="@+id/tvArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+        </LinearLayout>
+
+        <!-- M3 Progress section: time start + Slider + time end -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+            <!-- M3 Slider — wavy style is the default track shape in M3 Expressive -->
+            <com.google.android.material.slider.Slider
+                android:id="@+id/seekSlider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="0"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="100"
+                app:haloRadius="20dp"
+                app:thumbHeight="20dp"
+                app:thumbTrackGapSize="0dp"
+                app:thumbWidth="4dp"
+                app:trackHeight="4dp"
+                app:trackInsideCornerSize="2dp"
+                app:trackStopIndicatorSize="0dp" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+        </LinearLayout>
+
+        <!-- M3 Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="120dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Primary controls: prev / play-pause FAB / next -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPrev"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:contentDescription="@null"
+                    app:icon="@drawable/ic_skip_previous"
+                    app:iconTint="?attr/colorOnSurface" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="0dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnPlayPause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_play"
+                    app:backgroundTint="?attr/colorPrimaryContainer"
+                    app:elevation="4dp"
+                    app:fabSize="normal"
+                    app:maxImageSize="28dp"
+                    app:tint="?attr/colorOnPrimaryContainer" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNext"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:contentDescription="@null"
+                    app:icon="@drawable/ic_skip_next"
+                    app:iconTint="?attr/colorOnSurface" />
+
+            </LinearLayout>
+
+            <!-- Secondary controls: shuffle / like / queue / repeat -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShuffle"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:alpha="0.6"
+                    android:contentDescription="@null"
+                    app:icon="@drawable/ic_shuffle"
+                    app:iconTint="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLike"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:alpha="0.6"
+                    android:contentDescription="@null"
+                    app:icon="@drawable/ic_favorite_border"
+                    app:iconTint="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQueue"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:alpha="0.6"
+                    android:contentDescription="@null"
+                    app:icon="@drawable/ic_queue_music"
+                    app:iconTint="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRepeat"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:alpha="0.6"
+                    android:contentDescription="@null"
+                    app:icon="@drawable/ic_repeat"
+                    app:iconTint="?attr/colorOnSurfaceVariant" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_bottom_nav" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

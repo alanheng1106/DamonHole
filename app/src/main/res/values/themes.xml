@@ -1,0 +1,141 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme using Material 3 DayNight -->
+    <style name="Base.Theme.DamonHole" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- M3 Color roles mapped from brand colors -->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <!-- Prevents white/dark flash when a new Activity is starting -->
+        <item name="android:windowBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOutlineVariant">@color/md_theme_light_outlineVariant</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+        <!-- M3 Shape system -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.DamonHole.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.DamonHole.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.DamonHole.LargeComponent</item>
+        <!-- M3 Typography -->
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.DamonHole.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.DamonHole.DisplayMedium</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.DamonHole.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.DamonHole.HeadlineMedium</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.DamonHole.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.DamonHole.TitleMedium</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.DamonHole.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.DamonHole.BodyMedium</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.DamonHole.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.DamonHole.LabelMedium</item>
+        <!-- Window & navigation -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
+        <!-- M3 Motion -->
+        <item name="motionDurationShort1">100</item>
+        <item name="motionDurationMedium1">200</item>
+        <item name="motionDurationLong1">300</item>
+        <!-- FAB style -->
+        <item name="floatingActionButtonStyle">@style/Widget.Material3.FloatingActionButton.Primary</item>
+        <!-- MaterialButton default -->
+        <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
+        <!-- Card -->
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <!-- Chip -->
+        <item name="chipStyle">@style/Widget.Material3.Chip.Filter</item>
+        <!-- Switch -->
+        <item name="switchStyle">@style/Widget.Material3.CompoundButton.Switch</item>
+        <!-- TextInputLayout -->
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+    </style>
+
+    <style name="Theme.DamonHole" parent="Base.Theme.DamonHole" />
+
+    <style name="Widget.DamonHole.Indicator"
+        parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorSecondaryContainer</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">32dp</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearance.DamonHole.Pill
+        </item>
+    </style>
+
+    <style name="ShapeAppearance.DamonHole.Pill"
+        parent="ShapeAppearance.Material3.Corner.Full">
+    </style>
+
+    <!-- M3 Shape overrides -->
+    <style name="ShapeAppearance.DamonHole.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="ShapeAppearance.DamonHole.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="ShapeAppearance.DamonHole.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!-- M3 Typography styles -->
+    <style name="TextAppearance.DamonHole.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">sans-serif</item>
+    </style>
+    <style name="TextAppearance.DamonHole.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">sans-serif</item>
+    </style>
+    <style name="TextAppearance.DamonHole.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="TextAppearance.DamonHole.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="TextAppearance.DamonHole.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="TextAppearance.DamonHole.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="TextAppearance.DamonHole.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">sans-serif</item>
+    </style>
+    <style name="TextAppearance.DamonHole.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">sans-serif</item>
+    </style>
+    <style name="TextAppearance.DamonHole.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="TextAppearance.DamonHole.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <!-- M3 Dialog style -->
+    <style name="ThemeOverlay.DamonHole.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.DamonHole.LargeComponent</item>
+    </style>
+</resources>
