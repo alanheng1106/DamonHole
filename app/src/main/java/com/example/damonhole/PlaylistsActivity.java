@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -284,22 +285,28 @@ private String extractPlaylistId(String url) {
             }
 
             @Override
-            public void onDeleteClick(Playlist playlist) {
-                new AlertDialog.Builder(PlaylistsActivity.this)
-                        .setTitle(R.string.delete_playlist_title)
-                        .setMessage(getString(R.string.delete_playlist_confirm, playlist.name))
-                        .setPositiveButton(R.string.delete, (dialog, which) -> {
-                            PlaylistManager.getInstance(PlaylistsActivity.this).removePlaylist(playlist.id);
-                            loadPlaylists();
-                            Toast.makeText(PlaylistsActivity.this, R.string.playlist_deleted, Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton(R.string.cancel, null)
-                        .show();
-            }
-
-            @Override
-            public void onRenameClick(Playlist playlist) {
-                PlaylistManager.getInstance(PlaylistsActivity.this).showRenamePlaylistDialog(PlaylistsActivity.this, playlist, newName -> loadPlaylists());
+            public void onMoreClick(View view, Playlist playlist) {
+                PopupMenu popup = new PopupMenu(PlaylistsActivity.this, view);
+                popup.getMenu().add(0, 1, 0, R.string.rename);
+                popup.getMenu().add(0, 2, 0, R.string.delete);
+                popup.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == 1) {
+                        PlaylistManager.getInstance(PlaylistsActivity.this).showRenamePlaylistDialog(PlaylistsActivity.this, playlist, newName -> loadPlaylists());
+                    } else if (item.getItemId() == 2) {
+                        new AlertDialog.Builder(PlaylistsActivity.this)
+                                .setTitle(R.string.delete_playlist_title)
+                                .setMessage(getString(R.string.delete_playlist_confirm, playlist.name))
+                                .setPositiveButton(R.string.delete, (dialog, which) -> {
+                                    PlaylistManager.getInstance(PlaylistsActivity.this).removePlaylist(playlist.id);
+                                    loadPlaylists();
+                                    Toast.makeText(PlaylistsActivity.this, R.string.playlist_deleted, Toast.LENGTH_SHORT).show();
+                                })
+                                .setNegativeButton(R.string.cancel, null)
+                                .show();
+                    }
+                    return true;
+                });
+                popup.show();
             }
         });
         rvPlaylists.setAdapter(adapter);

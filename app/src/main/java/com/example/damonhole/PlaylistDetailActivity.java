@@ -61,18 +61,6 @@ public class PlaylistDetailActivity extends AppCompatActivity {
 
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
         btnSort.setOnClickListener(this::showSortMenu);
-        findViewById(R.id.btnDelete).setOnClickListener(v -> {
-            new androidx.appcompat.app.AlertDialog.Builder(this)
-                    .setTitle(R.string.delete_playlist_title)
-                    .setMessage(getString(R.string.delete_playlist_confirm, playlistName))
-                    .setPositiveButton(R.string.delete, (dialog, which) -> {
-                        PlaylistManager.getInstance(this).removePlaylist(playlistId);
-                        finish();
-                        Toast.makeText(this, R.string.playlist_deleted, Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton(R.string.cancel, null)
-                    .show();
-        });
 
         setupRecyclerView();
         loadPlaylistSongs();
