@@ -24,8 +24,9 @@ import java.util.concurrent.Executors;
 public class UpdateManager {
 
     private static final String TAG = "UpdateManager";
-    // PLACEHOLDER URL: User should replace this with the actual URL hosting the update JSON
-    private static final String UPDATE_JSON_URL = "https://raw.githubusercontent.com/example/DamonHole/main/update.json";
+    // PLACEHOLDER URL: User should replace this with the actual URL hosting the
+    // update JSON
+    private static final String UPDATE_JSON_URL = "https://raw.githubusercontent.com/alanheng1106/DamonHole/main/update.json";
 
     private final Context context;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -45,13 +46,14 @@ public class UpdateManager {
                 HttpURLConnection conn = (HttpURLConnection) new URL(UPDATE_JSON_URL).openConnection();
                 conn.setConnectTimeout(10000);
                 conn.setReadTimeout(10000);
-                
+
                 int responseCode = conn.getResponseCode();
                 if (responseCode == 200) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     StringBuilder sb = new StringBuilder();
                     String line;
-                    while ((line = reader.readLine()) != null) sb.append(line);
+                    while ((line = reader.readLine()) != null)
+                        sb.append(line);
                     reader.close();
 
                     JSONObject json = new JSONObject(sb.toString());
@@ -64,15 +66,18 @@ public class UpdateManager {
                     if (latestVersionCode > currentVersionCode) {
                         mainHandler.post(() -> showUpdateDialog(latestVersionName, updateUrl));
                     } else if (manual) {
-                        mainHandler.post(() -> Toast.makeText(context, R.string.app_up_to_date, Toast.LENGTH_SHORT).show());
+                        mainHandler.post(
+                                () -> Toast.makeText(context, R.string.app_up_to_date, Toast.LENGTH_SHORT).show());
                     }
                 } else if (manual) {
-                    mainHandler.post(() -> Toast.makeText(context, R.string.update_check_failed, Toast.LENGTH_SHORT).show());
+                    mainHandler.post(
+                            () -> Toast.makeText(context, R.string.update_check_failed, Toast.LENGTH_SHORT).show());
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Update check failed", e);
                 if (manual) {
-                    mainHandler.post(() -> Toast.makeText(context, R.string.update_check_failed, Toast.LENGTH_SHORT).show());
+                    mainHandler.post(
+                            () -> Toast.makeText(context, R.string.update_check_failed, Toast.LENGTH_SHORT).show());
                 }
             }
         });
