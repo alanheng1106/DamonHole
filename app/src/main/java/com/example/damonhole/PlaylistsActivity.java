@@ -296,6 +296,11 @@ private String extractPlaylistId(String url) {
                         .setNegativeButton(R.string.cancel, null)
                         .show();
             }
+
+            @Override
+            public void onRenameClick(Playlist playlist) {
+                PlaylistManager.getInstance(PlaylistsActivity.this).showRenamePlaylistDialog(PlaylistsActivity.this, playlist, newName -> loadPlaylists());
+            }
         });
         rvPlaylists.setAdapter(adapter);
     }

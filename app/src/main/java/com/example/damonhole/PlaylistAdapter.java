@@ -20,6 +20,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         void onPlaylistClick(Playlist playlist);
         void onPlayClick(Playlist playlist);
         void onDeleteClick(Playlist playlist);
+        void onRenameClick(Playlist playlist);
     }
 
     public PlaylistAdapter(OnPlaylistClickListener listener) {
@@ -65,6 +66,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
         // Delete button click
         holder.btnDelete.setOnClickListener(v -> listener.onDeleteClick(playlist));
+
+        // Rename button click
+        holder.btnRename.setOnClickListener(v -> listener.onRenameClick(playlist));
     }
 
     @Override
@@ -76,7 +80,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         MaterialCardView card;
         TextView tvName, tvDetails;
         FloatingActionButton btnPlay;
-        View btnDelete;
+        View btnDelete, btnRename;
 
         public PlaylistViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +89,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
             tvDetails = itemView.findViewById(R.id.tvPlaylistDetails);
             btnPlay = itemView.findViewById(R.id.btnPlayPlaylist);
             btnDelete = itemView.findViewById(R.id.btnDeletePlaylist);
+            btnRename = itemView.findViewById(R.id.btnRenamePlaylist);
         }
     }
 }

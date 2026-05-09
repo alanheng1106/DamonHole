@@ -280,6 +280,12 @@ public class MainActivity extends AppCompatActivity {
                         .setNegativeButton(R.string.cancel, null)
                         .show();
             }
+            @Override
+            public void onRenameClick(Playlist playlist) {
+                playlistManager.showRenamePlaylistDialog(MainActivity.this, playlist, newName -> {
+                    playlistAdapter.setPlaylists(playlistManager.getPlaylists());
+                });
+            }
         });
         recyclerView.setAdapter(songAdapter);
     }

@@ -82,6 +82,15 @@
         android:gravity="center_vertical">
 
         <ImageButton
+            android:id="@+id/btnRenamePlaylist"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="@null"
+            app:tint="?attr/colorOnSurfaceVariant" />
+        <ImageButton
             android:id="@+id/btnDeletePlaylist"
             android:layout_width="40dp"
             android:layout_height="40dp"

@@ -17,6 +17,9 @@ public class PlaylistManager {
     public interface OnPlaylistCreatedListener {
         void onCreated(String name);
     }
+    public interface OnPlaylistRenamedListener {
+        void onRenamed(String newName);
+    }
     private static final String PREFS_NAME = "playlists_prefs";
     private static final String KEY_PLAYLISTS = "playlists";
 
@@ -116,6 +119,18 @@ public class PlaylistManager {
         syncToFirebase(playlists);
     }
 
+    public void renamePlaylist(String playlistId, String newName) {
+        List<Playlist> playlists = getPlaylists();
+        for (Playlist p : playlists) {
+            if (p.id.equals(playlistId)) {
+                p.name = newName;
+                saveLocally(playlists);
+                syncToFirebase(playlists);
+                break;
+            }
+        }
+    }
+
     public void syncFromFirebase() {
         if (mAuth.getCurrentUser() == null) return;
         String uid = mAuth.getCurrentUser().getUid();
@@ -144,6 +159,26 @@ public class PlaylistManager {
                     if (!name.isEmpty()) {
                         createPlaylist(name, context.getString(R.string.me));
                         if (listener != null) listener.onCreated(name);
+                    }
+                })
+                .setNegativeButton(context.getString(R.string.cancel), null)
+                .show();
+    }
+
+    public void showRenamePlaylistDialog(Context context, Playlist playlist, OnPlaylistRenamedListener listener) {
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_create_playlist, null);
+        EditText etPlaylistName = dialogView.findViewById(R.id.etPlaylistName);
+        etPlaylistName.setText(playlist.name);
+        etPlaylistName.setSelection(playlist.name.length());
+
+        new AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.rename_playlist))
+                .setView(dialogView)
+                .setPositiveButton(context.getString(R.string.rename), (dialog, which) -> {
+                    String name = etPlaylistName.getText().toString().trim();
+                    if (!name.isEmpty()) {
+                        renamePlaylist(playlist.id, name);
+                        if (listener != null) listener.onRenamed(name);
                     }
                 })
                 .setNegativeButton(context.getString(R.string.cancel), null)
