@@ -1,6 +1,6 @@
 # DamonHole 🎵
 
-![DamonHole Banner](damonhole_banner_1778317265330.png)
+![DamonHole Banner](DamonHole.png)
 
 DamonHole is a premium, open-source Android music player that leverages the power of the **NewPipe Extractor** to provide a seamless streaming experience from YouTube's vast library, all wrapped in a modern **Material 3** design.
 
