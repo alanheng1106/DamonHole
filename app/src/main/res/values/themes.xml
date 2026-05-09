@@ -113,6 +113,9 @@
     <style name="TextAppearance.DamonHole.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="fontFamily">sans-serif-medium</item>
     </style>
+    <style name="TextAppearance.DamonHole.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
     <style name="TextAppearance.DamonHole.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="fontFamily">sans-serif-medium</item>
     </style>
