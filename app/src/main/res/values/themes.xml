@@ -40,7 +40,7 @@
         <item name="textAppearanceDisplayMedium">@style/TextAppearance.DamonHole.DisplayMedium</item>
         <item name="textAppearanceHeadlineLarge">@style/TextAppearance.DamonHole.HeadlineLarge</item>
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.DamonHole.HeadlineMedium</item>
-        <item name="textAppearanceTitleLarge">@style/TextAppearance.DamonHole.TitleLarge</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.DamonHole.HeadlineSmall</item>
         <item name="textAppearanceTitleMedium">@style/TextAppearance.DamonHole.TitleMedium</item>
         <item name="textAppearanceBodyLarge">@style/TextAppearance.DamonHole.BodyLarge</item>
         <item name="textAppearanceBodyMedium">@style/TextAppearance.DamonHole.BodyMedium</item>
@@ -89,15 +89,15 @@
     <!-- M3 Shape overrides -->
     <style name="ShapeAppearance.DamonHole.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">12dp</item>
     </style>
     <style name="ShapeAppearance.DamonHole.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">20dp</item>
     </style>
     <style name="ShapeAppearance.DamonHole.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">24dp</item>
+        <item name="cornerSize">28dp</item>
     </style>
 
     <!-- M3 Typography styles -->

@@ -171,4 +171,23 @@
     <string name="sort_title_za">Title (Z-A)</string>
     <string name="built_with">Built with ❤️</string>
     <string name="version_format">Version %s</string>
+    <string name="check_for_updates">Check for Updates</string>
+    <string name="checking_for_updates">Checking for updates…</string>
+    <string name="update_available_title">Update Available</string>
+    <string name="update_available_msg">A new version of DamonHole is available (%s). Would you like to update now?</string>
+    <string name="update_now">Update Now</string>
+    <string name="later">Later</string>
+    <string name="app_up_to_date">DamonHole is up to date.</string>
+    <string name="update_check_failed">Failed to check for updates. Please try again later.</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="equalizer_preset_bass">Bass</string>
+    <string name="equalizer_preset_vocal">Vocal</string>
+    <string name="equalizer_preset_rock">Rock</string>
+    <string name="equalizer_preset_pop">Pop</string>
+    <string name="equalizer_preset_electronic">Electronic</string>
+    <string name="equalizer_preset_dance">Dance</string>
+    <string name="equalizer_preset_classical">Classical</string>
+    <string name="equalizer_preset_clear">Clear</string>
+    <string name="equalizer_preset_balance">Balance</string>
+    <string name="equalizer_preset_custom">Custom</string>
 </resources>

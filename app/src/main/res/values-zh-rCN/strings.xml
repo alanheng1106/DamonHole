@@ -172,4 +172,23 @@
     <string name="faq_a_change_theme">转到“设置”并使用“深色模式”开关在浅色和深色主题之间切换。</string>
     <string name="faq_q_audio_quality">我可以更改音频质量吗？</string>
     <string name="faq_a_audio_quality">应用会根据您的互联网连接自动选择最佳质量，以确保流畅播放。</string>
+    <string name="check_for_updates">检查更新</string>
+    <string name="checking_for_updates">正在检查更新…</string>
+    <string name="update_available_title">发现新版本</string>
+    <string name="update_available_msg">DamonHole 有新版本可用 (%s)。是否立即更新？</string>
+    <string name="update_now">立即更新</string>
+    <string name="later">稍后</string>
+    <string name="app_up_to_date">DamonHole 已是最新版本。</string>
+    <string name="update_check_failed">检查更新失败。请稍后再试。</string>
+    <string name="equalizer">均衡器</string>
+    <string name="equalizer_preset_bass">低音</string>
+    <string name="equalizer_preset_vocal">人声</string>
+    <string name="equalizer_preset_rock">摇滚</string>
+    <string name="equalizer_preset_pop">流行</string>
+    <string name="equalizer_preset_electronic">电子</string>
+    <string name="equalizer_preset_dance">舞曲</string>
+    <string name="equalizer_preset_classical">古典</string>
+    <string name="equalizer_preset_clear">清晰</string>
+    <string name="equalizer_preset_balance">平衡</string>
+    <string name="equalizer_preset_custom">自定义</string>
 </resources>

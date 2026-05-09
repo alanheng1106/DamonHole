@@ -315,7 +315,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@android:drawable/ic_popup_sync"
+                            android:src="@drawable/ic_update"
                             app:tint="?attr/colorPrimary" />
 
                         <TextView

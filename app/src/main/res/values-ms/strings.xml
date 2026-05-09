@@ -170,4 +170,23 @@
     <string name="sort_title_za">Tajuk (Z-A)</string>
     <string name="built_with">Dibina dengan ❤️</string>
     <string name="version_format">Versi %s</string>
+    <string name="check_for_updates">Semak Kemas Kini</string>
+    <string name="checking_for_updates">Menyemak kemas kini…</string>
+    <string name="update_available_title">Kemas Kini Tersedia</string>
+    <string name="update_available_msg">Versi baharu DamonHole tersedia (%s). Adakah anda mahu mengemas kini sekarang?</string>
+    <string name="update_now">Kemas Kini Sekarang</string>
+    <string name="later">Kemudian</string>
+    <string name="app_up_to_date">DamonHole adalah versi terkini.</string>
+    <string name="update_check_failed">Gagal menyemak kemas kini. Sila cuba sebentar lagi.</string>
+    <string name="equalizer">Ekualizer</string>
+    <string name="equalizer_preset_bass">Bass</string>
+    <string name="equalizer_preset_vocal">Vokal</string>
+    <string name="equalizer_preset_rock">Rock</string>
+    <string name="equalizer_preset_pop">Pop</string>
+    <string name="equalizer_preset_electronic">Elektronik</string>
+    <string name="equalizer_preset_dance">Tarian</string>
+    <string name="equalizer_preset_classical">Klasikal</string>
+    <string name="equalizer_preset_clear">Jelas</string>
+    <string name="equalizer_preset_balance">Seimbang</string>
+    <string name="equalizer_preset_custom">Tersuai</string>
 </resources>
