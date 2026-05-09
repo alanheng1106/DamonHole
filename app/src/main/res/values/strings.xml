@@ -167,6 +167,7 @@
     <string name="no_songs_found">No valid songs found in playlist.</string>
     <string name="import_failed">Failed to import playlist. Check your internet or API key.</string>
     <string name="import_hint">https://youtube.com/playlist?list=…</string>
+    <string name="youtube_playlist_link">YouTube Playlist Link</string>
     <string name="action_import">Import</string>
     <string name="system_eq_not_found">System equalizer not found.</string>
     <string name="creating_account">Creating account…</string>

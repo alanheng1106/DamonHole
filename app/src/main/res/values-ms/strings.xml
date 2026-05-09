@@ -141,6 +141,7 @@
     <string name="no_songs_found">Tiada lagu sah ditemui dalam senarai main.</string>
     <string name="import_failed">Gagal mengimport senarai main. Semak internet atau kunci API anda.</string>
     <string name="import_hint">https://youtube.com/playlist?list=…</string>
+    <string name="youtube_playlist_link">Pautan Senarai Main YouTube</string>
     <string name="action_import">Import</string>
     <string name="system_eq_not_found">Ekualizer sistem tidak ditemui.</string>
     <string name="creating_account">Mencipta akaun…</string>

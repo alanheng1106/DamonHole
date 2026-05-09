@@ -81,6 +81,7 @@
     <string name="no_songs_found">播放列表中未找到有效歌曲。</string>
     <string name="import_failed">无法导入播放列表。请检查你的网络。</string>
     <string name="import_hint">https://youtube.com/playlist?list=…</string>
+    <string name="youtube_playlist_link">YouTube 播放列表链接</string>
     <string name="action_import">导入</string>
     <string name="system_eq_not_found">未找到系统均衡器。</string>
     <string name="creating_account">正在创建账户…</string>
