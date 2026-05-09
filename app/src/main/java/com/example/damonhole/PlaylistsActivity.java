@@ -123,7 +123,7 @@ public class PlaylistsActivity extends AppCompatActivity {
         }
     }
 
-private void importYoutubePlaylist(String url) {
+private void importYoutubePlaylist(String name, String url) {
     // 1. Extract the ID from the URL
     String playlistId = extractPlaylistId(url);
     
@@ -176,7 +176,7 @@ private void importYoutubePlaylist(String url) {
             runOnUiThread(() -> {
                 if (!fetchedSongs.isEmpty()) {
                     // Create a new playlist with the imported songs
-                    PlaylistManager.getInstance(this).createPlaylist(getString(R.string.imported_playlist_name), fetchedSongs);
+                    PlaylistManager.getInstance(this).createPlaylist(name, fetchedSongs);
                     loadPlaylists(); // Refresh your RecyclerView
                     Toast.makeText(this, getString(R.string.imported_songs_count, fetchedSongs.size()), Toast.LENGTH_SHORT).show();
                 } else {
@@ -195,14 +195,22 @@ private void importYoutubePlaylist(String url) {
 
     private void showImportYoutubeDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_import_youtube, null);
-        EditText input = dialogView.findViewById(R.id.etYoutubeUrl);
+        EditText etPlaylistName = dialogView.findViewById(R.id.etPlaylistName);
+        EditText etYoutubeUrl = dialogView.findViewById(R.id.etYoutubeUrl);
 
         new AlertDialog.Builder(this)
                 .setView(dialogView)
                 .setPositiveButton(R.string.action_import, (dialog, which) -> {
-                    String url = input.getText().toString().trim();
+                    String name = etPlaylistName.getText().toString().trim();
+                    String url = etYoutubeUrl.getText().toString().trim();
+                    
+                    if (name.isEmpty()) {
+                        Toast.makeText(this, R.string.enter_playlist_name, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    
                     if (!url.isEmpty()) {
-                        importYoutubePlaylist(url);
+                        importYoutubePlaylist(name, url);
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
