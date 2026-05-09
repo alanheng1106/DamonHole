@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.google.android.material.color.DynamicColors;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,13 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showForgotPasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.reset_password_title);
-        builder.setMessage(R.string.reset_password_desc);
-
-        final EditText input = new EditText(this);
-        input.setHint(R.string.email);
-        input.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_forgot_password, null);
+        EditText input = dialogView.findViewById(R.id.etResetEmail);
         
         // Check if user already typed something in email field
         String currentEmail = etEmail.getText().toString().trim();
@@ -63,25 +60,26 @@ public class LoginActivity extends AppCompatActivity {
             input.setText(currentEmail);
         }
 
-        builder.setView(input);
-
-        builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
-            String email = input.getText().toString().trim();
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
-            } else {
-                mAuth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, R.string.reset_email_sent, Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
-        builder.show();
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.reset_password_title)
+                .setView(dialogView)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    String email = input.getText().toString().trim();
+                    if (TextUtils.isEmpty(email)) {
+                        Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
+                    } else {
+                        mAuth.sendPasswordResetEmail(email)
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, R.string.reset_email_sent, Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
+                .show();
     }
 
     private void loginUser() {
