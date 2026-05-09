@@ -10,13 +10,6 @@
     android:paddingTop="20dp"
     android:paddingBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/create_new_playlist"
-        android:textAppearance="?attr/textAppearanceTitleLarge"
-        android:textColor="?attr/colorOnSurface"
-        android:layout_marginBottom="20dp" />
 
     <!-- M3 TextInputLayout with floating label -->
     <com.google.android.material.textfield.TextInputLayout

@@ -153,6 +153,7 @@ public class PlaylistManager {
         EditText etPlaylistName = dialogView.findViewById(R.id.etPlaylistName);
 
         new AlertDialog.Builder(context)
+                .setTitle(R.string.create_new_playlist)
                 .setView(dialogView)
                 .setPositiveButton(context.getString(R.string.create), (dialog, which) -> {
                     String name = etPlaylistName.getText().toString().trim();
