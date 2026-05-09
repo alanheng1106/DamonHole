@@ -46,14 +46,5 @@
     <style name="Theme.DamonHole" parent="Base.Theme.DamonHole">
     </style>
 
-    <style name="Widget.DamonHole.Indicator"
-        parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">?attr/colorSecondaryContainer</item>
-        <item name="android:width">64dp</item>
-        <item name="android:height">32dp</item>
-        <item name="shapeAppearanceOverlay">
-            @style/ShapeAppearance.DamonHole.Pill
-        </item>
-    </style>
 
 </resources>
