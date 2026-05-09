@@ -69,6 +69,8 @@
     <string name="delete_playlist_title">Padam Senarai Main</string>
     <string name="delete_playlist_confirm">Adakah anda pasti mahu memadam \"%s\"? Tindakan ini tidak boleh diubah.</string>
     <string name="playlist_deleted">Senarai main dipadamkan</string>
+    <string name="rename_playlist">Nama Semula Senarai Main</string>
+    <string name="rename">Nama Semula</string>
 
     <!-- Welcome / Pre-login -->
     <string name="welcome_desc">Destinasi utama anda untuk penemuan muzik. Strim lagu kegemaran anda, cipta senarai main tersuai, dan nikmati pengalaman audio yang lancar di mana-mana sahaja, pada bila-bila masa.</string>

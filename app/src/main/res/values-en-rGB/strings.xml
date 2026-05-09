@@ -70,6 +70,8 @@
     <string name="delete_playlist_title">Delete Playlist</string>
     <string name="delete_playlist_confirm">Are you sure you want to delete \"%s\"? This action cannot be undone.</string>
     <string name="playlist_deleted">Playlist deleted</string>
+    <string name="rename_playlist">Rename Playlist</string>
+    <string name="rename">Rename</string>
 
     <!-- Welcome / Pre-login -->
     <string name="welcome_desc">Your ultimate destination for music discovery. Stream your favorite songs, create custom playlists, and enjoy a seamless audio experience anywhere, anytime.</string>

@@ -72,37 +72,24 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Delete Button -->
-    <!-- Buttons Container -->
+    <!-- More Button Container -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="12dp"
+        android:elevation="6dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMorePlaylist"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_more_vert"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:contentDescription="@null"
-            app:tint="?attr/colorOnSurfaceVariant" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnPlayPlaylist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            app:fabSize="mini"
-            android:src="@drawable/ic_play"
-            app:backgroundTint="?attr/colorPrimaryContainer"
-            app:tint="?attr/colorOnPrimaryContainer"
-            app:elevation="4dp"
-            app:maxImageSize="20dp" />
+            app:icon="@drawable/ic_more_vert"
+            app:iconTint="?attr/colorOnSurfaceVariant" />
     </LinearLayout>
 
 </FrameLayout>

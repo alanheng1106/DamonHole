@@ -59,9 +59,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         // compete with the FAB's touch target
         holder.card.setOnClickListener(v -> listener.onPlaylistClick(playlist));
 
-        // FAB click — stopPropagation not needed since the card click is on
-        // the card itself and the FAB is a separate view on top
-        holder.btnPlay.setOnClickListener(v -> listener.onPlayClick(playlist));
 
         // More button click
         holder.btnMore.setOnClickListener(v -> listener.onMoreClick(v, playlist));
@@ -75,7 +72,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     static class PlaylistViewHolder extends RecyclerView.ViewHolder {
         MaterialCardView card;
         TextView tvName, tvDetails;
-        FloatingActionButton btnPlay;
         View btnMore;
 
         public PlaylistViewHolder(@NonNull View itemView) {
@@ -83,7 +79,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
             card = itemView.findViewById(R.id.cardPlaylist);
             tvName = itemView.findViewById(R.id.tvPlaylistName);
             tvDetails = itemView.findViewById(R.id.tvPlaylistDetails);
-            btnPlay = itemView.findViewById(R.id.btnPlayPlaylist);
             btnMore = itemView.findViewById(R.id.btnMorePlaylist);
         }
     }

@@ -70,6 +70,8 @@
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_confirm">你确定要删除“%s”吗？此操作无法撤销。</string>
     <string name="playlist_deleted">播放列表已删除</string>
+    <string name="rename_playlist">重命名播放列表</string>
+    <string name="rename">重命名</string>
 
     <string name="import_youtube_playlist">导入 YouTube 播放列表</string>
     <string name="invalid_playlist_url">无效的 YouTube 播放列表 URL</string>
