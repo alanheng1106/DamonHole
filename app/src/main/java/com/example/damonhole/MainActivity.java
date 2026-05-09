@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PlaylistManager playlistManager;
     private LikedSongsManager likedManager;
-    private com.google.android.material.progressindicator.CircularProgressIndicator searchLoadingIndicator;
+    private View searchLoadingIndicator;
 
     private SearchHistoryAdapter historyAdapter;
     private final List<String> searchHistory = new ArrayList<>();

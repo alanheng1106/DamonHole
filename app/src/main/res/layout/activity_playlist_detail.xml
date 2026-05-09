@@ -17,8 +17,8 @@
 
         <com.google.android.material.loadingindicator.LoadingIndicator
             android:id="@+id/progressIndicator"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_gravity="center"
             app:indicatorColor="?attr/colorPrimary" />
     </FrameLayout>

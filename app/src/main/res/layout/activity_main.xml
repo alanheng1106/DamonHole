@@ -82,10 +82,8 @@
             android:visibility="gone" />
 
         <!-- M3 Expressive Loading Indicator (shown during search) -->
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <com.google.android.material.loadingindicator.LoadingIndicator
             android:id="@+id/progressIndicator"
-            app:trackThickness="4dp"
-            app:indicatorSize="48dp"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center_horizontal"

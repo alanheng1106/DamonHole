@@ -2,6 +2,8 @@ package com.example.damonhole;
 
 import android.content.ComponentName;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,18 +55,22 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         tvEmpty = findViewById(R.id.tvEmpty);
         recyclerView = findViewById(R.id.recyclerView);
         btnSort = findViewById(R.id.btnSort);
+        loadingOverlay = findViewById(R.id.loadingOverlay);
 
         tvName.setText(playlistName);
-
-        loadingOverlay = findViewById(R.id.loadingOverlay);
-        if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
-
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
         btnSort.setOnClickListener(this::showSortMenu);
 
         setupRecyclerView();
-        loadPlaylistSongs();
-        if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
+
+        // Show loading overlay immediately
+        if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
+
+        // Load data with a slight delay to ensure smooth transition and visible loader
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            loadPlaylistSongs();
+            if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
+        }, 600);
     }
 
     private void setupRecyclerView() {
