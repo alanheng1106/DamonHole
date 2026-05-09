@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- M3: Main / Home screen -->
+<!-- M3: Main / Home screen - PixelPlayer Inspired -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,32 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="56dp">
+        android:paddingTop="32dp">
 
-        <!-- M3 TopAppBar-style header -->
+        <!-- M3 Header Section -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="24dp"
-            android:layout_marginBottom="20dp">
-
-            <!-- M3 ShapeableImageView circular avatar -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivProfile"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_music_note"
-                android:padding="10dp"
-                android:background="?attr/colorSecondaryContainer"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-                app:tint="?attr/colorOnSecondaryContainer" />
+            android:layout_marginBottom="24dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ivProfile"
-                android:layout_marginStart="16dp"
-                android:layout_centerVertical="true"
                 android:orientation="vertical">
 
                 <TextView
@@ -44,55 +30,68 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/good_morning"
-                    android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:alpha="0.7" />
 
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/music_fan"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
             </LinearLayout>
+
+            <!-- Profile Avatar -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_music_note"
+                android:padding="12dp"
+                android:background="?attr/colorTertiaryContainer"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                app:tint="?attr/colorOnTertiaryContainer" />
 
         </RelativeLayout>
 
-        <!-- M3 SearchBar (full-width, rounded pill) -->
+        <!-- M3 SearchBar -->
         <com.google.android.material.search.SearchBar
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="24dp"
             android:hint="@string/search_hint"
             app:navigationIcon="@drawable/ic_search"
-            app:navigationIconTint="?attr/colorOnSurfaceVariant"
             style="@style/Widget.Material3.SearchBar" />
 
-        <!-- M3 TitleLarge section heading -->
         <TextView
             android:id="@+id/tvSectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="Recent Tracks"
             android:textAppearance="?attr/textAppearanceTitleLarge"
             android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="12dp"
+            android:textStyle="bold"
             android:visibility="gone" />
 
-        <!-- M3 Expressive Loading Indicator (shown during search) -->
+        <!-- Loading Indicator -->
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressIndicator"
-            app:trackThickness="4dp"
-            app:indicatorSize="48dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginVertical="32dp"
             android:visibility="gone"
-            app:indicatorColor="?attr/colorPrimary" />
+            app:indicatorSize="48dp"
+            app:trackThickness="4dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -100,26 +99,21 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:paddingBottom="140dp"
-            android:scrollbars="vertical"
-            android:scrollbarThumbVertical="?attr/colorPrimary"
-            android:scrollbarStyle="outsideOverlay"
-            android:fadeScrollbars="true" />
-
-        <!-- M3 Tonal button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCreatePlaylist"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="16dp"
-            android:text="@string/create_new_playlist"
-            android:visibility="gone" />
+            android:paddingBottom="140dp" />
 
     </LinearLayout>
 
-    <!-- M3 NavigationBar -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnCreatePlaylist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:layout_marginBottom="120dp"
+        android:text="@string/create_new_playlist"
+        app:icon="@drawable/ic_playlist_add"
+        android:visibility="gone"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
     <include layout="@layout/layout_bottom_nav" />
 
     <!-- M3 SearchView -->
@@ -134,8 +128,7 @@
             android:id="@+id/rvSearchHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:clipToPadding="false" />
+            android:padding="16dp" />
 
     </com.google.android.material.search.SearchView>
 
