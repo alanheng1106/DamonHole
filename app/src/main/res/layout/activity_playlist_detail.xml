@@ -25,7 +25,9 @@
 
     <androidx.core.widget.NestedScrollView
         android:scrollbars="vertical"
-        android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="?attr/colorPrimary"
+        android:scrollbarStyle="outsideOverlay"
+        android:fadeScrollbars="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
