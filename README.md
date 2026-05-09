@@ -4,7 +4,7 @@
 
 DamonHole is a premium, open-source Android music player that leverages the power of the **NewPipe Extractor** to provide a seamless streaming experience from YouTube's vast library, all wrapped in a modern **Material 3** design.
 
-[![Version](https://img.shields.io/badge/Version-1.1-purple?style=for-the-badge)](https://github.com/alanheng1106/DamonHole/releases)
+[![Version](https://img.shields.io/badge/Version-1.2-purple?style=for-the-badge)](https://github.com/alanheng1106/DamonHole/releases)
 [![Platform](https://img.shields.io/badge/Platform-Android-green?style=for-the-badge&logo=android)](https://www.android.com/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge)](LICENSE)
 
