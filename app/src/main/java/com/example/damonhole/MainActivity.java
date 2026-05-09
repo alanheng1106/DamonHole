@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.recyclerView);
         tvSectionTitle = findViewById(R.id.tvSectionTitle);
-//        btnCreatePlaylist = findViewById(R.id.btnCreatePlaylist);
+        btnCreatePlaylist = findViewById(R.id.btnCreatePlaylist);
         searchLoadingIndicator = findViewById(R.id.progressIndicator);
 
         findViewById(R.id.ivProfile).setOnClickListener(v -> {
