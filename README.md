@@ -6,7 +6,7 @@ DamonHole is a premium, open-source Android music player that leverages the powe
 
 [![Version](https://img.shields.io/badge/Version-1.1-purple?style=for-the-badge)](https://github.com/alanheng1106/DamonHole/releases)
 [![Platform](https://img.shields.io/badge/Platform-Android-green?style=for-the-badge&logo=android)](https://www.android.com/)
-[![License](https://img.shields.io/badge/License-Educational-orange?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge)](LICENSE)
 
 ## ✨ Features
 
