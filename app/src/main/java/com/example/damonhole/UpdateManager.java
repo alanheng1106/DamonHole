@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
 public class UpdateManager {
 
     private static final String TAG = "UpdateManager";
-    private static final String UPDATE_JSON_URL = "https://raw.githubusercontent.com/alanheng1106/DamonHole/6f428d7a5dd49e1d0bba266fa59adfe8ff8451be/update.json";
+    private static final String UPDATE_JSON_URL = "https://raw.githubusercontent.com/alanheng1106/DamonHole/main/update.json";
 
     private final Context context;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
