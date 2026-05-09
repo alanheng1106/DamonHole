@@ -8,6 +8,8 @@
     android:background="?android:attr/windowBackground">
 
     <androidx.core.widget.NestedScrollView
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="100dp"
