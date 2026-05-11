@@ -34,7 +34,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         tilConfirmPassword = findViewById(R.id.tilConfirmPassword);
         btnUpdatePassword = findViewById(R.id.btnUpdatePassword);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnUpdatePassword.setOnClickListener(v -> updatePassword());
     }
 

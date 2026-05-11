@@ -58,7 +58,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         loadingOverlay = findViewById(R.id.loadingOverlay);
 
         tvName.setText(playlistName);
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnSort.setOnClickListener(this::showSortMenu);
 
         setupRecyclerView();

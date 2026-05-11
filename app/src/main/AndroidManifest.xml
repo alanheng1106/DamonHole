@@ -29,7 +29,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DamonHole"
-        android:localeConfig="@xml/locales_config">
+        android:localeConfig="@xml/locales_config"
+        android:enableOnBackInvokedCallback="true">
         <activity android:name=".QueueActivity" android:exported="false" />
         <activity android:name=".FAQActivity" android:exported="false" />
         <activity android:name=".LikedSongsActivity" />

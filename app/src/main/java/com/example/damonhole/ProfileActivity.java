@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfileLarge = findViewById(R.id.ivProfileLarge);
         btnSave = findViewById(R.id.btnSave);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         loadUserProfile();
 

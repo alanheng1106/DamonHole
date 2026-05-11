@@ -34,7 +34,7 @@ public class QueueActivity extends AppCompatActivity {
 
         tvEmpty = findViewById(R.id.tvEmpty);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SongAdapter(new SongAdapter.OnSongClickListener() {

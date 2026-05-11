@@ -20,7 +20,7 @@ public class LanguageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         checkEnUk = findViewById(R.id.checkEnUk);
         checkZhCn = findViewById(R.id.checkZhCn);

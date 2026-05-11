@@ -76,7 +76,7 @@ public class FAQActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         btnLanguage.setOnClickListener(v -> {
             startActivity(new Intent(this, LanguageActivity.class));

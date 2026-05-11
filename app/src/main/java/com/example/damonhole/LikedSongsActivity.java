@@ -53,7 +53,7 @@ public class LikedSongsActivity extends AppCompatActivity {
         tvCount  = findViewById(R.id.tvCount);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnSort.setOnClickListener(this::showSortMenu);
 
         loadingOverlay = findViewById(R.id.loadingOverlay);
