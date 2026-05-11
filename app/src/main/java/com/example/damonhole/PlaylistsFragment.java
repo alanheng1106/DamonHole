@@ -130,35 +130,46 @@ public class PlaylistsFragment extends BaseTabFragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                String apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?" +
-                        "part=snippet&maxResults=50&playlistId=" + playlistId + "&key=" + YOUTUBE_API_KEY;
-
-                URL urlObj = new URL(apiUrl);
-                HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
-                connection.setRequestMethod("GET");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                JSONObject jsonObject = new JSONObject(response.toString());
-                JSONArray items = jsonObject.getJSONArray("items");
-
                 List<SongItem> fetchedSongs = new ArrayList<>();
+                String nextPageToken = null;
 
-                for (int i = 0; i < items.length(); i++) {
-                    JSONObject snippet = items.getJSONObject(i).getJSONObject("snippet");
-                    String title = snippet.getString("title");
-                    String author = snippet.getString("videoOwnerChannelTitle");
-                    String videoId = snippet.getJSONObject("resourceId").getString("videoId");
+                // Loop through all pages (YouTube API returns max 50 per page)
+                do {
+                    String apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?" +
+                            "part=snippet&maxResults=50&playlistId=" + playlistId + "&key=" + YOUTUBE_API_KEY;
+                    if (nextPageToken != null) {
+                        apiUrl += "&pageToken=" + nextPageToken;
+                    }
 
-                    if (title.equals("Private video") || title.equals("Deleted video")) continue;
-                    fetchedSongs.add(new SongItem(videoId, title, author));
-                }
+                    URL urlObj = new URL(apiUrl);
+                    HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+
+                    JSONObject jsonObject = new JSONObject(response.toString());
+                    JSONArray items = jsonObject.getJSONArray("items");
+
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject snippet = items.getJSONObject(i).getJSONObject("snippet");
+                        String title = snippet.getString("title");
+                        String author = snippet.getString("videoOwnerChannelTitle");
+                        String videoId = snippet.getJSONObject("resourceId").getString("videoId");
+
+                        if (title.equals("Private video") || title.equals("Deleted video")) continue;
+                        fetchedSongs.add(new SongItem(videoId, title, author));
+                    }
+
+                    // Get next page token (null if no more pages)
+                    nextPageToken = jsonObject.optString("nextPageToken", null);
+
+                } while (nextPageToken != null);
 
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(() -> {
