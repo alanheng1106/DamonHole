@@ -219,6 +219,18 @@ public class PlaylistsFragment extends BaseTabFragment {
 
     private void setupRecyclerView() {
         rvPlaylists.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        // Play item entry animation only on first creation, then clear it
+        android.view.animation.LayoutAnimationController lac =
+                android.view.animation.AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_animation_from_bottom);
+        rvPlaylists.setLayoutAnimation(lac);
+        rvPlaylists.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                rvPlaylists.setLayoutAnimation(null);
+                rvPlaylists.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
         adapter = new PlaylistAdapter(new PlaylistAdapter.OnPlaylistClickListener() {
             @Override
             public void onPlaylistClick(Playlist playlist) {

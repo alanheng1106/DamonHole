@@ -100,6 +100,18 @@ public class HomeFragment extends BaseTabFragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
+        // Play item entry animation only on first creation, then clear it
+        android.view.animation.LayoutAnimationController lac =
+                android.view.animation.AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_from_bottom);
+        recyclerView.setLayoutAnimation(lac);
+        recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                recyclerView.setLayoutAnimation(null);
+                recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
         setupAdapters();
         setupSearchHistory(view);
 

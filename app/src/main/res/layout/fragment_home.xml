@@ -102,8 +102,7 @@
             android:scrollbars="vertical"
             android:scrollbarThumbVertical="?attr/colorPrimary"
             android:scrollbarStyle="outsideOverlay"
-            android:fadeScrollbars="true"
-            android:layoutAnimation="@anim/layout_animation_from_bottom" />
+            android:fadeScrollbars="true" />
 
         <!-- M3 Tonal button -->
         <com.google.android.material.button.MaterialButton
