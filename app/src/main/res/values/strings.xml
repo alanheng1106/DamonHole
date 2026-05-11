@@ -67,6 +67,7 @@
     <string name="create">Create</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="play">Play</string>
     <string name="delete_playlist_title">Delete Playlist</string>
     <string name="delete_playlist_confirm">Are you sure you want to delete \"%s\"? This action cannot be undone.</string>
     <string name="playlist_deleted">Playlist deleted</string>

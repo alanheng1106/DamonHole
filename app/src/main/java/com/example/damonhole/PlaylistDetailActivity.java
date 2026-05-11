@@ -83,7 +83,26 @@ public class PlaylistDetailActivity extends AppCompatActivity {
 
             @Override
             public void onMoreClick(View view, SongItem song) {
-                // Future: Add options like remove from playlist
+                android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(PlaylistDetailActivity.this, view);
+                popupMenu.getMenu().add(0, 1, 0, getString(R.string.play));
+                popupMenu.getMenu().add(0, 2, 0, getString(R.string.delete));
+                
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case 1:
+                            extractAndPlay(song.videoId);
+                            return true;
+                        case 2:
+                            songs.remove(song);
+                            PlaylistManager.getInstance(PlaylistDetailActivity.this)
+                                    .updatePlaylistSongs(playlistId, songs, currentSortOrder);
+                            applySorting(); // Refreshes adapter
+                            return true;
+                        default:
+                            return false;
+                    }
+                });
+                popupMenu.show();
             }
         });
         recyclerView.setAdapter(adapter);

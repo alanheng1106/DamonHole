@@ -66,6 +66,7 @@
     <string name="create">Cipta</string>
     <string name="cancel">Batal</string>
     <string name="delete">Padam</string>
+    <string name="play">Main</string>
     <string name="delete_playlist_title">Padam Senarai Main</string>
     <string name="delete_playlist_confirm">Adakah anda pasti mahu memadam \"%s\"? Tindakan ini tidak boleh diubah.</string>
     <string name="playlist_deleted">Senarai main dipadamkan</string>

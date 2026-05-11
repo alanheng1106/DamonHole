@@ -67,6 +67,7 @@
     <string name="create">创建</string>
     <string name="cancel">取消</string>
     <string name="delete">删除</string>
+    <string name="play">播放</string>
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_confirm">你确定要删除“%s”吗？此操作无法撤销。</string>
     <string name="playlist_deleted">播放列表已删除</string>
