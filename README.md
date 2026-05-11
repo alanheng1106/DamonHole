@@ -4,7 +4,7 @@
 
 DamonHole is a premium, open-source Android music player that leverages the power of the **NewPipe Extractor** to provide a seamless streaming experience from YouTube's vast library, all wrapped in a modern **Material 3** design.
 
-[![Version](https://img.shields.io/badge/Version-1.2-purple?style=for-the-badge)](https://github.com/alanheng1106/DamonHole/releases)
+[![Version](https://img.shields.io/badge/Version-1.3-purple?style=for-the-badge)](https://github.com/alanheng1106/DamonHole/releases)
 [![Platform](https://img.shields.io/badge/Platform-Android-green?style=for-the-badge&logo=android)](https://www.android.com/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge)](LICENSE)
 
@@ -13,7 +13,9 @@ DamonHole is a premium, open-source Android music player that leverages the powe
 - **🚀 YouTube Streaming**: Search and stream high-quality audio directly from YouTube without premium subscriptions.
 - **📥 Playlist Import**: Easily import public YouTube playlists by simply pasting the link and giving it a name.
 - **🎨 Material 3 Design**: Clean, modern interface with support for Dynamic Colors and Dark Mode.
-- **🌟 Expressive Visuals**: Features the Material 3 Expressive Loading Indicator (star-shaped) for a playful and modern feel.
+- **📱 Single-Activity Architecture**: Refactored to a modern single-activity architecture using Fragments for a faster, smoother, and more stable experience.
+- **✨ Premium Navigation**: Stationary bottom navigation bar with direction-aware horizontal slide transitions between pages.
+- **🌟 Expressive Visuals**: Features the Material 3 Expressive Loading Indicator (star-shaped) and Palette-based dynamic backgrounds in Now Playing.
 - **🔑 User Authentication**: Secure login and registration powered by Firebase Authentication.
 - **📂 Playlist Management**: Create custom playlists, add your favorite tracks, and sync them across devices via Firebase Firestore.
 - **❤️ Liked Songs**: Save your favorite tracks with a single tap.
