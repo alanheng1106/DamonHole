@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements DynamicThemeManag
             // Revert to default
             findViewById(android.R.id.content).setBackgroundColor(Color.TRANSPARENT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
-            bottomNav.setBackgroundResource(R.color.nav_bg_default); // Assuming there's a default
+            bottomNav.setBackgroundColor(Color.TRANSPARENT); 
             return;
         }
 
