@@ -89,6 +89,16 @@ public class PlaylistsFragment extends BaseTabFragment {
             showImportYoutubeDialog();
         });
 
+        // Setup SwipeRefreshLayout
+        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        if (swipeRefresh != null) {
+            swipeRefresh.setOnRefreshListener(() -> {
+                loadPlaylists();
+                updateLikedSongsCount();
+                swipeRefresh.setRefreshing(false);
+            });
+        }
+
         setupRecyclerView();
         loadPlaylists();
         updateLikedSongsCount();

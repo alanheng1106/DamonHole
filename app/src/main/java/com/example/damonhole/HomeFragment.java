@@ -58,6 +58,7 @@ public class HomeFragment extends BaseTabFragment {
     private PlaylistManager playlistManager;
     private LikedSongsManager likedManager;
     private View searchLoadingIndicator;
+    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh;
 
     private SearchHistoryAdapter historyAdapter;
     private final List<String> searchHistory = new ArrayList<>();
@@ -93,6 +94,15 @@ public class HomeFragment extends BaseTabFragment {
         tvSectionTitle = view.findViewById(R.id.tvSectionTitle);
         btnCreatePlaylist = view.findViewById(R.id.btnCreatePlaylist);
         searchLoadingIndicator = view.findViewById(R.id.progressIndicator);
+
+        // Setup SwipeRefreshLayout for pull-to-refresh
+        swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeResources(
+                com.google.android.material.R.color.m3_ref_palette_dynamic_primary40,
+                com.google.android.material.R.color.m3_ref_palette_dynamic_secondary40,
+                com.google.android.material.R.color.m3_ref_palette_dynamic_tertiary40
+        );
+        swipeRefresh.setOnRefreshListener(this::loadRecentHits);
 
         view.findViewById(R.id.ivProfile).setOnClickListener(v -> {
             startActivity(new Intent(context, ProfileActivity.class));
@@ -239,6 +249,7 @@ public class HomeFragment extends BaseTabFragment {
             if (getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
                     if (searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.GONE);
+                    if (swipeRefresh != null) swipeRefresh.setRefreshing(false);
                     if (!results.isEmpty()) {
                         tvSectionTitle.setVisibility(View.VISIBLE);
                         tvSectionTitle.setText(getString(R.string.recent_hits));

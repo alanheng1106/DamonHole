@@ -59,6 +59,15 @@ public class LikedSongsActivity extends AppCompatActivity {
         loadingOverlay = findViewById(R.id.loadingOverlay);
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
 
+        // Setup SwipeRefreshLayout
+        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
+        if (swipeRefresh != null) {
+            swipeRefresh.setOnRefreshListener(() -> {
+                refreshList();
+                swipeRefresh.setRefreshing(false);
+            });
+        }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new LikedAdapter(new ArrayList<>(), song -> {
             Toast.makeText(this, getString(R.string.loading_song, song.title), Toast.LENGTH_SHORT).show();

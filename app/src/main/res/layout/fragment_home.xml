@@ -81,7 +81,7 @@
             android:layout_marginBottom="12dp"
             android:visibility="gone" />
 
-        <!-- M3 Expressive Loading Indicator (shown during search) -->
+        <!-- M3 Expressive Loading Indicator (shown during initial load/search) -->
         <com.google.android.material.loadingindicator.LoadingIndicator
             android:id="@+id/progressIndicator"
             android:layout_width="48dp"
@@ -92,17 +92,25 @@
             android:visibility="gone"
             app:indicatorColor="?attr/colorPrimary" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <!-- SwipeRefreshLayout for pull-to-refresh -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingBottom="140dp"
-            android:scrollbars="vertical"
-            android:scrollbarThumbVertical="?attr/colorPrimary"
-            android:scrollbarStyle="outsideOverlay"
-            android:fadeScrollbars="true" />
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="140dp"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="?attr/colorPrimary"
+                android:scrollbarStyle="outsideOverlay"
+                android:fadeScrollbars="true" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <!-- M3 Tonal button -->
         <com.google.android.material.button.MaterialButton

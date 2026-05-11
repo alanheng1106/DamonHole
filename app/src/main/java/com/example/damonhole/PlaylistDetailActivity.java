@@ -61,6 +61,15 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnSort.setOnClickListener(this::showSortMenu);
 
+        // Setup SwipeRefreshLayout
+        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
+        if (swipeRefresh != null) {
+            swipeRefresh.setOnRefreshListener(() -> {
+                loadPlaylistSongs();
+                swipeRefresh.setRefreshing(false);
+            });
+        }
+
         setupRecyclerView();
 
         // Show loading overlay immediately
