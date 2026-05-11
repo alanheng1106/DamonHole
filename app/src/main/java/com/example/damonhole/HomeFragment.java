@@ -40,6 +40,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.damonhole.ui.DynamicThemeManager;
 
 public class HomeFragment extends BaseTabFragment {
 

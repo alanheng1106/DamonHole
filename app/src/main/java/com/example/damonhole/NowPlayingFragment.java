@@ -31,6 +31,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.slider.Slider;
+import com.example.damonhole.ui.DynamicThemeManager;
 
 public class NowPlayingFragment extends BaseTabFragment {
 

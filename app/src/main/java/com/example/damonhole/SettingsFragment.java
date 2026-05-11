@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.damonhole.ui.DynamicThemeManager;
 
 public class SettingsFragment extends BaseTabFragment {
 

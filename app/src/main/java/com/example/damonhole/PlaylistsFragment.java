@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.example.damonhole.ui.DynamicThemeManager;
 
 public class PlaylistsFragment extends BaseTabFragment {
 
