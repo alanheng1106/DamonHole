@@ -22,7 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
-            app:indicatorColor="?attr/colorPrimary" />
+            app:indicatorColor="?attr/colorPrimary"
+            app:waveAmplitude="3dp"
+            app:wavelength="20dp" />
     </FrameLayout>
 
     <!-- M3 Loading Indicator (shown during pull-to-refresh) -->

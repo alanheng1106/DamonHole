@@ -91,7 +91,9 @@
             android:layout_marginBottom="32dp"
             android:indeterminate="true"
             android:visibility="gone"
-            app:indicatorColor="?attr/colorPrimary" />
+            app:indicatorColor="?attr/colorPrimary"
+            app:waveAmplitude="3dp"
+            app:wavelength="20dp" />
 
         <!-- M3 Loading Indicator (shown during pull-to-refresh) -->
         <com.google.android.material.loadingindicator.LoadingIndicator
