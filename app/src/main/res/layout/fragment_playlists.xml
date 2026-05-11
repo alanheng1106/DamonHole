@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- M3: Playlists screen content as Fragment -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -213,7 +214,5 @@
             app:backgroundTint="?attr/colorPrimaryContainer"
             app:elevation="6dp" />
     </LinearLayout>
-
-    <include layout="@layout/layout_bottom_nav" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

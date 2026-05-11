@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- M3: Settings screen -->
+<!-- M3: Settings screen content as Fragment -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
-
-    <!-- M3 Expressive Loading Indicator overlay -->
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -340,7 +338,5 @@
                 android:textColor="?attr/colorOnSurfaceVariant" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <include layout="@layout/layout_bottom_nav" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

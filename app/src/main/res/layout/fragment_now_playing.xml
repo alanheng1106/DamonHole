@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- M3: Now Playing screen -->
+<!-- M3: Now Playing screen content as Fragment -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -228,7 +228,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <include layout="@layout/layout_bottom_nav" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
