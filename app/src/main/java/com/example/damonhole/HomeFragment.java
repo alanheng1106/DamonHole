@@ -479,7 +479,7 @@ public class HomeFragment extends BaseTabFragment {
         if (tvSectionTitle != null) tvSectionTitle.setTextColor(palette.onSurface);
 
         // SearchBar & SearchView
-        searchBar.setCardBackgroundColor(android.content.res.ColorStateList.valueOf(palette.primaryContainer));
+        searchBar.setBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.primaryContainer));
         tintSearchBarIcon(searchBar, palette.onPrimaryContainer);
         searchBar.setHintTextColor(palette.onPrimaryContainer);
         
