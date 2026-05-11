@@ -1,131 +1,100 @@
 package com.example.damonhole
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.view.animation.Interpolator
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
 /**
- * PixelPlayer-style navigation transitions using Kotlin + Android Animator API.
- * Implements:
- *   - Parallax slide: exiting screen moves only 33%, entering moves 100%
- *   - Alpha blending: smooth fade overlay on both screens simultaneously
- *   - 380ms duration with FastOutSlowInInterpolator (Material easing curve)
+ * PixelPlayer-exact navigation transitions.
+ * - Forward: enter slides 100% from right + fade; exit slides -33% (parallax) + fade
+ * - Backward: enter from -33% with scale 0.9→1.0 + fade; exit to +100% with scale 1.0→0.75 + fade
+ * Both animations run simultaneously on the same ValueAnimator for a true layered parallax feel.
  */
 object NavigationTransitions {
 
-    private const val DURATION_MS = 380L
+    private const val DURATION_MS = 350L
     private val EASING: Interpolator = FastOutSlowInInterpolator()
 
-    /**
-     * Performs a forward tab switch animation (moving right: Home → Settings).
-     * - Enter: slides in from +100% with fade in
-     * - Exit: slides to -33% with fade out (parallax)
-     */
-    fun navigateForward(
+    fun switchTab(
         fm: FragmentManager,
         containerId: Int,
-        target: Fragment
+        currentFragment: Fragment?,
+        targetFragment: Fragment,
+        isForward: Boolean
     ) {
+        // Capture current view reference BEFORE transaction
+        val currentView = currentFragment?.view
+
         val tx = fm.beginTransaction()
+        if (!targetFragment.isAdded) {
+            tx.add(containerId, targetFragment)
+        } else {
+            tx.show(targetFragment)
+        }
 
-        val currentFragment = fm.findFragmentById(containerId)
-
-        tx.replace(containerId, target)
         tx.runOnCommit {
-            val enterView = target.view ?: return@runOnCommit
-            val screenWidth = enterView.resources.displayMetrics.widthPixels.toFloat()
+            val targetView = targetFragment.view ?: return@runOnCommit
+            val w = targetView.resources.displayMetrics.widthPixels.toFloat()
 
-            // Start position: fully off-screen to the right
-            enterView.translationX = screenWidth
-            enterView.alpha = 0f
+            // Set initial state for entering view
+            if (isForward) {
+                targetView.translationX = w
+                targetView.alpha = 0f
+            } else {
+                targetView.translationX = -w * 0.33f
+                targetView.scaleX = 0.9f
+                targetView.scaleY = 0.9f
+                targetView.alpha = 0f
+            }
 
-            // Animate: slide in from right, fade in
-            ValueAnimator.ofFloat(0f, 1f).apply {
+            val anim = ValueAnimator.ofFloat(0f, 1f).apply {
                 duration = DURATION_MS
                 interpolator = EASING
-                addUpdateListener { anim ->
-                    val fraction = anim.animatedFraction
-                    enterView.translationX = screenWidth * (1f - fraction)
-                    enterView.alpha = fraction
-                }
-                start()
             }
 
-            // Animate exit: parallax slide left (-33%) + fade out
-            currentFragment?.view?.let { exitView ->
-                ValueAnimator.ofFloat(0f, 1f).apply {
-                    duration = DURATION_MS
-                    interpolator = EASING
-                    addUpdateListener { anim ->
-                        val fraction = anim.animatedFraction
-                        exitView.translationX = -screenWidth * 0.33f * fraction
-                        exitView.alpha = 1f - fraction
+            anim.addUpdateListener { va ->
+                val f = va.animatedFraction
+                // ── Enter ──
+                if (isForward) {
+                    targetView.translationX = w * (1f - f)
+                    targetView.alpha = f
+                } else {
+                    targetView.translationX = -w * 0.33f * (1f - f)
+                    targetView.alpha = f
+                    targetView.scaleX = 0.9f + 0.1f * f
+                    targetView.scaleY = 0.9f + 0.1f * f
+                }
+                // ── Exit (parallax) ──
+                if (isForward) {
+                    currentView?.translationX = -w * 0.33f * f
+                    currentView?.alpha = 1f - f
+                } else {
+                    currentView?.translationX = w * f
+                    currentView?.alpha = 1f - f
+                    currentView?.scaleX = 1f - 0.25f * f
+                    currentView?.scaleY = 1f - 0.25f * f
+                }
+            }
+
+            anim.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    // Reset exiting view, then hide it
+                    currentView?.apply {
+                        translationX = 0f; alpha = 1f
+                        scaleX = 1f; scaleY = 1f
                     }
-                    start()
-                }
-            }
-        }
-        tx.commit()
-    }
-
-    /**
-     * Performs a backward tab switch animation (moving left: Settings → Home).
-     * - Enter: slides in from -33% (parallax position) with scale 0.9→1.0 and fade in
-     * - Exit: slides to +100% with scale 1.0→0.8 and fade out
-     */
-    fun navigateBackward(
-        fm: FragmentManager,
-        containerId: Int,
-        target: Fragment
-    ) {
-        val tx = fm.beginTransaction()
-
-        val currentFragment = fm.findFragmentById(containerId)
-
-        tx.replace(containerId, target)
-        tx.runOnCommit {
-            val enterView = target.view ?: return@runOnCommit
-            val screenWidth = enterView.resources.displayMetrics.widthPixels.toFloat()
-
-            // Start position: parallax position (-33%) with slight scale down
-            enterView.translationX = -screenWidth * 0.33f
-            enterView.alpha = 0f
-            enterView.scaleX = 0.9f
-            enterView.scaleY = 0.9f
-
-            // Animate: slide in from parallax, scale up, fade in
-            ValueAnimator.ofFloat(0f, 1f).apply {
-                duration = DURATION_MS
-                interpolator = EASING
-                addUpdateListener { anim ->
-                    val fraction = anim.animatedFraction
-                    enterView.translationX = -screenWidth * 0.33f * (1f - fraction)
-                    enterView.alpha = fraction
-                    enterView.scaleX = 0.9f + 0.1f * fraction
-                    enterView.scaleY = 0.9f + 0.1f * fraction
-                }
-                start()
-            }
-
-            // Animate exit: slide to +100%, scale down to 0.8, fade out
-            currentFragment?.view?.let { exitView ->
-                ValueAnimator.ofFloat(0f, 1f).apply {
-                    duration = DURATION_MS
-                    interpolator = EASING
-                    addUpdateListener { anim ->
-                        val fraction = anim.animatedFraction
-                        exitView.translationX = screenWidth * fraction
-                        exitView.alpha = 1f - fraction
-                        exitView.scaleX = 1f - 0.2f * fraction
-                        exitView.scaleY = 1f - 0.2f * fraction
+                    if (currentFragment != null && currentFragment.isAdded) {
+                        fm.beginTransaction().hide(currentFragment).commitAllowingStateLoss()
                     }
-                    start()
                 }
-            }
+            })
+
+            anim.start()
         }
-        tx.commit()
+        tx.commitAllowingStateLoss()
     }
 }

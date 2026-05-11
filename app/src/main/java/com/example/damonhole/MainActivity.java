@@ -99,20 +99,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Fragment targetFragment = fragments.get(targetId);
-        if (targetFragment == null)
-            return;
+        if (targetFragment == null) return;
 
-        // Determine direction based on tab order
+        // Get the currently displayed fragment (null on first call)
+        Fragment currentFragment = fragments.get(currentSelectedId);
+        if (currentFragment == targetFragment) currentFragment = null;
+
         int currentPos = getPosition(currentSelectedId);
-        int targetPos = getPosition(targetId);
+        int targetPos  = getPosition(targetId);
+        boolean isForward = targetPos > currentPos;
 
-        if (targetPos > currentPos) {
-            NavigationTransitions.INSTANCE.navigateForward(
-                    getSupportFragmentManager(), R.id.fragmentContainer, targetFragment);
-        } else {
-            NavigationTransitions.INSTANCE.navigateBackward(
-                    getSupportFragmentManager(), R.id.fragmentContainer, targetFragment);
-        }
+        NavigationTransitions.INSTANCE.switchTab(
+                getSupportFragmentManager(),
+                R.id.fragmentContainer,
+                currentFragment,
+                targetFragment,
+                isForward
+        );
 
         currentSelectedId = targetId;
     }
