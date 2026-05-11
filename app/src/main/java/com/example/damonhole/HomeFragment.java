@@ -466,7 +466,7 @@ public class HomeFragment extends BaseTabFragment {
             tvGreeting.setTextColor(requireContext().getColor(android.R.color.tab_indicator_text)); // Fallback
             tvUserName.setTextColor(requireContext().getColor(android.R.color.primary_text_dark));
             
-            searchBar.setNavigationIconTint(getResources().getColor(R.color.text_secondary_default));
+            searchBar.setNavigationIconTint(getResources().getColor(R.color.md_theme_dark_onSurfaceVariant));
             progressIndicator.setIndicatorColor(getResources().getColor(R.color.md_theme_light_primary));
             return;
         }
