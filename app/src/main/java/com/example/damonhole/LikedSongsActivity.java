@@ -59,12 +59,16 @@ public class LikedSongsActivity extends AppCompatActivity {
         loadingOverlay = findViewById(R.id.loadingOverlay);
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
 
-        // Setup SwipeRefreshLayout
+        // Setup SwipeRefreshLayout (hide default spinner, use M3 LoadingIndicator)
         androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
+        View refreshIndicator = findViewById(R.id.refreshIndicator);
         if (swipeRefresh != null) {
+            swipeRefresh.setProgressViewOffset(true, 0, 0);
             swipeRefresh.setOnRefreshListener(() -> {
-                refreshList();
                 swipeRefresh.setRefreshing(false);
+                if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
+                refreshList();
+                if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
             });
         }
 

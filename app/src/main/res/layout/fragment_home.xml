@@ -81,14 +81,26 @@
             android:layout_marginBottom="12dp"
             android:visibility="gone" />
 
-        <!-- M3 Expressive Loading Indicator (shown during initial load/search) -->
-        <com.google.android.material.loadingindicator.LoadingIndicator
+        <!-- M3 Progress Indicator (shown during initial load/search) -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressIndicator"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="?attr/colorPrimary" />
+
+        <!-- M3 Loading Indicator (shown during pull-to-refresh) -->
+        <com.google.android.material.loadingindicator.LoadingIndicator
+            android:id="@+id/refreshIndicator"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:visibility="gone"
             app:indicatorColor="?attr/colorPrimary" />
 

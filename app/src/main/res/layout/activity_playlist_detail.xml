@@ -15,13 +15,24 @@
         android:visibility="gone"
         android:background="?android:attr/windowBackground">
 
-        <com.google.android.material.loadingindicator.LoadingIndicator
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressIndicator"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:indeterminate="true"
             app:indicatorColor="?attr/colorPrimary" />
     </FrameLayout>
+
+    <!-- M3 Loading Indicator (shown during pull-to-refresh) -->
+    <com.google.android.material.loadingindicator.LoadingIndicator
+        android:id="@+id/refreshIndicator"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="60dp"
+        android:visibility="gone"
+        app:indicatorColor="?attr/colorPrimary" />
 
     <!-- SwipeRefreshLayout for pull-to-refresh -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

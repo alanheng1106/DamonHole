@@ -89,13 +89,17 @@ public class PlaylistsFragment extends BaseTabFragment {
             showImportYoutubeDialog();
         });
 
-        // Setup SwipeRefreshLayout
+        // Setup SwipeRefreshLayout (hide default spinner, use M3 LoadingIndicator)
         androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        View refreshIndicator = view.findViewById(R.id.refreshIndicator);
         if (swipeRefresh != null) {
+            swipeRefresh.setProgressViewOffset(true, 0, 0);
             swipeRefresh.setOnRefreshListener(() -> {
+                swipeRefresh.setRefreshing(false);
+                if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
                 loadPlaylists();
                 updateLikedSongsCount();
-                swipeRefresh.setRefreshing(false);
+                if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
             });
         }
 
