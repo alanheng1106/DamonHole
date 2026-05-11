@@ -61,6 +61,9 @@
                 <action android:name="androidx.media3.session.MediaSessionService"/>
             </intent-filter>
         </service>
+        <activity android:name=".AboutComposeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DamonHole" />
     </application>
 
 </manifest>

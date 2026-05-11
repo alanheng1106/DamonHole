@@ -86,6 +86,10 @@ public class SettingsFragment extends BaseTabFragment {
                 Toast.makeText(requireContext(), R.string.system_eq_not_found, Toast.LENGTH_SHORT).show();
             }
         });
+
+        view.findViewById(R.id.itemComposeDemo).setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), AboutComposeActivity.class));
+        });
     }
 
     private void fetchUserInfo() {
