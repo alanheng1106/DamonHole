@@ -28,24 +28,17 @@
     </FrameLayout>
 
     <!-- M3 Contained Loading Indicator (shown during pull-to-refresh) -->
-    <com.google.android.material.card.MaterialCardView
+    <com.google.android.material.loadingindicator.LoadingIndicator
         android:id="@+id/refreshIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="60dp"
         android:visibility="gone"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="2dp"
-        app:strokeWidth="0dp"
-        app:cardBackgroundColor="?attr/colorSurfaceContainerHighest">
-
-        <com.google.android.material.loadingindicator.LoadingIndicator
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
-            app:indicatorColor="?attr/colorPrimary" />
-    </com.google.android.material.card.MaterialCardView>
+        android:padding="12dp"
+        android:background="@drawable/bg_contained_indicator"
+        android:elevation="2dp"
+        app:indicatorColor="?attr/colorPrimary" />
 
     <!-- SwipeRefreshLayout for pull-to-refresh -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

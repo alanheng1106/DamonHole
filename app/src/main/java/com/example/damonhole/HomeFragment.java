@@ -59,6 +59,7 @@ public class HomeFragment extends BaseTabFragment {
     private LikedSongsManager likedManager;
     private View searchLoadingIndicator;
     private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh;
+    private View refreshIndicator;
 
     private SearchHistoryAdapter historyAdapter;
     private final List<String> searchHistory = new ArrayList<>();
@@ -95,12 +96,14 @@ public class HomeFragment extends BaseTabFragment {
         btnCreatePlaylist = view.findViewById(R.id.btnCreatePlaylist);
         searchLoadingIndicator = view.findViewById(R.id.progressIndicator);
 
-        // Setup SwipeRefreshLayout for pull-to-refresh (hide default spinner, use progressIndicator)
+        // Setup SwipeRefreshLayout for pull-to-refresh (hide default spinner, use refreshIndicator)
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        refreshIndicator = view.findViewById(R.id.refreshIndicator);
         swipeRefresh.setProgressViewOffset(true, 0, 0); // Hide default spinner off-screen
         swipeRefresh.setOnRefreshListener(() -> {
             swipeRefresh.setRefreshing(false); // Immediately hide default spinner
-            loadRecentHits(); // loadRecentHits shows searchLoadingIndicator (wave style)
+            if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
+            loadRecentHits(true); // true means it's a refresh, don't show the wave indicator
         });
 
         view.findViewById(R.id.ivProfile).setOnClickListener(v -> {
@@ -141,8 +144,8 @@ public class HomeFragment extends BaseTabFragment {
                 playlistAdapter.setPlaylists(playlistManager.getPlaylists());
             });
         });
-
-        loadRecentHits();
+        setupAdapters();
+        loadRecentHits(false); // Initial load, show the wave indicator
     }
 
     private void setupSearchHistory(View view) {
@@ -204,8 +207,8 @@ public class HomeFragment extends BaseTabFragment {
         historyPrefs.edit().putString("queries_list", sb.toString()).apply();
     }
 
-    private void loadRecentHits() {
-        if (searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.VISIBLE);
+    private void loadRecentHits(boolean isRefresh) {
+        if (!isRefresh && searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.VISIBLE);
         searchExecutor.execute(() -> {
             List<SongItem> results = new ArrayList<>();
             try {
@@ -248,6 +251,7 @@ public class HomeFragment extends BaseTabFragment {
             if (getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
                     if (searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.GONE);
+                    if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
                     if (!results.isEmpty()) {
                         tvSectionTitle.setVisibility(View.VISIBLE);
                         tvSectionTitle.setText(getString(R.string.recent_hits));
