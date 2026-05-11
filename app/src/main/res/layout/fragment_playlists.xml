@@ -8,17 +8,38 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
+
+    <!-- M3 Progress Indicator (shown during initial load or import) -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="?attr/colorPrimary"
+        app:waveAmplitude="3dp"
+        app:wavelength="20dp" />
+
     <!-- M3 Contained Loading Indicator (shown during pull-to-refresh) -->
-    <com.google.android.material.loadingindicator.LoadingIndicator
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/refreshIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="60dp"
         android:visibility="gone"
-        app:indicatorColor="?attr/colorPrimary"
-        app:containerColor="?attr/colorSurfaceContainerHighest"
-        app:containerCornerRadius="24dp" />
+        app:cardCornerRadius="24dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="?attr/colorSurfaceContainerHighest">
+
+        <com.google.android.material.loadingindicator.LoadingIndicator
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            app:indicatorColor="?attr/colorPrimary" />
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- SwipeRefreshLayout for pull-to-refresh -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

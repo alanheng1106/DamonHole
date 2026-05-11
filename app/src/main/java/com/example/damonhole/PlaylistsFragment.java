@@ -44,7 +44,8 @@ public class PlaylistsFragment extends BaseTabFragment {
     // FAB Menu Components
     private boolean isFabExpanded = false;
     private FloatingActionButton fabMain, fabCreate, fabImport;
-    private LinearLayout layoutFabCreate, layoutFabImport;
+    private View layoutFabCreate, layoutFabImport;
+    private View progressIndicator;
 
     private static final String YOUTUBE_API_KEY = "AIzaSyDYhuEVyx28D6Ve7Wd4yNCm9MlPjbEEw0U";
 
@@ -60,6 +61,7 @@ public class PlaylistsFragment extends BaseTabFragment {
 
         tvLikedSongsCount = view.findViewById(R.id.tvLikedSongsCount);
         rvPlaylists = view.findViewById(R.id.rvPlaylists);
+        progressIndicator = view.findViewById(R.id.progressIndicator);
 
         view.findViewById(R.id.cardLikedSongs).setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), LikedSongsActivity.class)));
@@ -141,6 +143,7 @@ public class PlaylistsFragment extends BaseTabFragment {
         }
 
         Toast.makeText(requireContext(), R.string.fetching_playlist, Toast.LENGTH_SHORT).show();
+        if (progressIndicator != null) progressIndicator.setVisibility(View.VISIBLE);
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
@@ -187,6 +190,7 @@ public class PlaylistsFragment extends BaseTabFragment {
 
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(() -> {
+                        if (progressIndicator != null) progressIndicator.setVisibility(View.GONE);
                         if (!fetchedSongs.isEmpty()) {
                             PlaylistManager.getInstance(requireContext()).createPlaylist(name, fetchedSongs);
                             loadPlaylists(); 
@@ -200,9 +204,10 @@ public class PlaylistsFragment extends BaseTabFragment {
             } catch (Exception e) {
                 e.printStackTrace();
                 if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> 
-                        Toast.makeText(requireContext(), R.string.import_failed, Toast.LENGTH_LONG).show()
-                    );
+                    getActivity().runOnUiThread(() -> {
+                        if (progressIndicator != null) progressIndicator.setVisibility(View.GONE);
+                        Toast.makeText(requireContext(), R.string.import_failed, Toast.LENGTH_LONG).show();
+                    });
                 }
             }
         });
