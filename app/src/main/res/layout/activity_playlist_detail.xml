@@ -90,10 +90,11 @@
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_gravity="center"
+                        android:background="?attr/colorSurfaceContainerHighest"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_music_note"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
-                        android:background="?attr/colorSurfaceContainerHighest"
-                        android:scaleType="centerCrop" />
+                        app:tint="?attr/colorOnSurface" />
 
                     <TextView
                         android:id="@+id/tvPlaylistName"

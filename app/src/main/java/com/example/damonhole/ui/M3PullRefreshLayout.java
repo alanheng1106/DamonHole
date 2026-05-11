@@ -23,6 +23,7 @@ public class M3PullRefreshLayout extends FrameLayout {
     private View refreshIndicatorContainer;
     private View loadingIndicator;
     
+    private float startX, startY;
     private float lastTouchY;
     private float totalPullDistance = 0;
     private final float refreshThreshold;
@@ -46,8 +47,8 @@ public class M3PullRefreshLayout extends FrameLayout {
         super(context, attrs);
         
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        refreshThreshold = dpToPx(80);
-        maxPullDistance = dpToPx(160);
+        refreshThreshold = dpToPx(100);
+        maxPullDistance = dpToPx(180);
         
         initIndicator();
     }
@@ -84,15 +85,20 @@ public class M3PullRefreshLayout extends FrameLayout {
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                lastTouchY = ev.getY();
+                startX = ev.getX();
+                startY = ev.getY();
+                lastTouchY = startY;
                 isBeingDragged = false;
                 break;
                 
             case MotionEvent.ACTION_MOVE:
+                float x = ev.getX();
                 float y = ev.getY();
-                float diff = y - lastTouchY;
+                float dx = Math.abs(x - startX);
+                float dy = y - startY;
                 
-                if (diff > touchSlop && !canChildScrollUp()) {
+                // Only intercept if pulling down, at the top, and it's a clear vertical gesture
+                if (dy > touchSlop && dy > dx * 2 && !canChildScrollUp()) {
                     isBeingDragged = true;
                     return true;
                 }
@@ -112,7 +118,7 @@ public class M3PullRefreshLayout extends FrameLayout {
                 
                 if (diff > 0) {
                     // Pulling down
-                    updatePullDistance(diff * 0.5f); // 0.5 friction
+                    updatePullDistance(diff * 0.4f); // 0.4 friction
                     return true;
                 }
                 break;
