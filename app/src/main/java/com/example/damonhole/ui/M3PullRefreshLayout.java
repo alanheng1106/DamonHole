@@ -98,7 +98,7 @@ public class M3PullRefreshLayout extends FrameLayout {
                 float dy = y - startY;
                 
                 // Only intercept if pulling down, at the top, and it's a clear vertical gesture
-                if (dy > touchSlop && dy > dx * 2 && !canChildScrollUp()) {
+                if (dy > touchSlop * 2 && dy > dx * 2 && !canChildScrollUp()) {
                     isBeingDragged = true;
                     return true;
                 }

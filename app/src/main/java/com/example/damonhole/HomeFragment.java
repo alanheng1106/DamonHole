@@ -45,6 +45,7 @@ public class HomeFragment extends BaseTabFragment {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private TextView tvUserName, tvGreeting;
 
     private final ExecutorService searchExecutor = Executors.newSingleThreadExecutor();
 
@@ -83,18 +84,18 @@ public class HomeFragment extends BaseTabFragment {
         db = FirebaseFirestore.getInstance();
         historyPrefs = context.getSharedPreferences("search_history", Context.MODE_PRIVATE);
         
+        tvUserName = view.findViewById(R.id.tvUserName);
+        tvGreeting = view.findViewById(R.id.tvGreeting);
+
+        updateGreeting();
+        fetchUserInfo();
+
         searchBar = view.findViewById(R.id.searchBar);
         searchView = view.findViewById(R.id.searchView);
         recyclerView = view.findViewById(R.id.recyclerView);
         tvSectionTitle = view.findViewById(R.id.tvSectionTitle);
         btnCreatePlaylist = view.findViewById(R.id.btnCreatePlaylist);
         searchLoadingIndicator = view.findViewById(R.id.progressIndicator);
-        
-        // Sync data from Firebase
-        if (mAuth.getCurrentUser() != null) {
-            likedManager.syncFromFirebase();
-            playlistManager.syncFromFirebase();
-        }
 
         // Setup M3 PullRefreshLayout
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
@@ -349,6 +350,33 @@ public class HomeFragment extends BaseTabFragment {
                 .show();
     }
 
+    private void updateGreeting() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        int greetingRes;
+        if (timeOfDay >= 5 && timeOfDay < 12) greetingRes = R.string.good_morning;
+        else if (timeOfDay >= 12 && timeOfDay < 17) greetingRes = R.string.good_afternoon;
+        else if (timeOfDay >= 17 && timeOfDay < 21) greetingRes = R.string.good_evening;
+        else greetingRes = R.string.good_night;
+        tvGreeting.setText(getString(greetingRes));
+    }
+
+    private void fetchUserInfo() {
+        if (mAuth.getCurrentUser() != null) {
+            String uid = mAuth.getCurrentUser().getUid();
+            db.collection("users").document(uid).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (isAdded() && documentSnapshot.exists()) {
+                            User user = documentSnapshot.toObject(User.class);
+                            if (user != null) {
+                                tvUserName.setText(user.getName());
+                                likedManager.syncFromFirebase();
+                                playlistManager.syncFromFirebase();
+                            }
+                        }
+                    });
+        }
+    }
 
     private void searchSongs(String query) {
         if (searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.VISIBLE);
