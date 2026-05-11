@@ -36,7 +36,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SongAdapter adapter;
-    private TextView tvName, tvEmpty;
+    private TextView tvName, tvEmpty, tvSongCount;
     private View btnSort;
     private View loadingOverlay;
 
@@ -54,6 +54,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
 
         tvName = findViewById(R.id.tvPlaylistName);
         tvEmpty = findViewById(R.id.tvEmpty);
+        tvSongCount = findViewById(R.id.tvSongCount);
         recyclerView = findViewById(R.id.recyclerView);
         btnSort = findViewById(R.id.btnSort);
         loadingOverlay = findViewById(R.id.loadingOverlay);
@@ -133,10 +134,15 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         if (songs == null || songs.isEmpty()) {
             tvEmpty.setVisibility(View.VISIBLE);
             adapter.setSongs(new ArrayList<>());
+            if (tvSongCount != null) tvSongCount.setText(getString(R.string.songs_count, 0));
         } else {
             tvEmpty.setVisibility(View.GONE);
             applySorting();
+            if (tvSongCount != null) tvSongCount.setText(getString(R.string.songs_count, songs.size()));
         }
+        
+        M3PullRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
+        if (swipeRefresh != null) swipeRefresh.setRefreshing(false);
     }
 
     private void showSortMenu(View v) {
