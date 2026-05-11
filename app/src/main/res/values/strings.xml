@@ -212,4 +212,6 @@
     <string name="later">Later</string>
     <string name="app_up_to_date">DamonHole is up to date.</string>
     <string name="update_check_failed">Failed to check for updates. Please try again later.</string>
+    <string name="unknown_title">Unknown Title</string>
+    <string name="unknown_artist">Unknown Artist</string>
 </resources>
