@@ -156,6 +156,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.example.damonhole.ui.M3PullRefreshLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
