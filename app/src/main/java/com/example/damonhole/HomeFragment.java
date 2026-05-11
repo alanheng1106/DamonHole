@@ -467,7 +467,9 @@ public class HomeFragment extends BaseTabFragment {
             tvUserName.setTextColor(requireContext().getColor(android.R.color.primary_text_dark));
             
             tintSearchBarIcon(searchBar, getResources().getColor(R.color.md_theme_dark_onSurfaceVariant));
-            progressIndicator.setIndicatorColor(getResources().getColor(R.color.md_theme_light_primary));
+            if (searchLoadingIndicator instanceof com.google.android.material.progressindicator.CircularProgressIndicator) {
+                ((com.google.android.material.progressindicator.CircularProgressIndicator)searchLoadingIndicator).setIndicatorColor(getResources().getColor(R.color.md_theme_light_primary));
+            }
             return;
         }
 
@@ -487,7 +489,9 @@ public class HomeFragment extends BaseTabFragment {
         searchView.getEditText().setHintTextColor(palette.onSurfaceVariant);
 
         // Progress Indicator
-        progressIndicator.setIndicatorColor(palette.primaryContainer);
+        if (searchLoadingIndicator instanceof com.google.android.material.progressindicator.CircularProgressIndicator) {
+            ((com.google.android.material.progressindicator.CircularProgressIndicator)searchLoadingIndicator).setIndicatorColor(palette.primaryContainer);
+        }
         
         // Pull Refresh
         M3PullRefreshLayout swipeRefresh = getView().findViewById(R.id.swipeRefresh);
