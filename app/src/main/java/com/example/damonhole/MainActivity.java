@@ -6,7 +6,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.media3.session.MediaController;
 import androidx.media3.session.SessionToken;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -103,34 +102,17 @@ public class MainActivity extends AppCompatActivity {
         if (targetFragment == null)
             return;
 
-        int enterAnim, exitAnim;
+        // Determine direction based on tab order
+        int currentPos = getPosition(currentSelectedId);
+        int targetPos = getPosition(targetId);
 
-        // Determine animation direction based on tab order
-        if (targetId == R.id.nav_home) {
-            enterAnim = R.anim.slide_in_left;
-            exitAnim = R.anim.slide_out_right;
-        } else if (currentSelectedId == R.id.nav_home) {
-            enterAnim = R.anim.slide_in_right;
-            exitAnim = R.anim.slide_out_left;
+        if (targetPos > currentPos) {
+            NavigationTransitions.INSTANCE.navigateForward(
+                    getSupportFragmentManager(), R.id.fragmentContainer, targetFragment);
         } else {
-            // Compare IDs to determine direction (Home < Playlists < NowPlaying < Settings)
-            int currentPos = getPosition(currentSelectedId);
-            int targetPos = getPosition(targetId);
-
-            if (targetPos > currentPos) {
-                enterAnim = R.anim.slide_in_right;
-                exitAnim = R.anim.slide_out_left;
-            } else {
-                enterAnim = R.anim.slide_in_left;
-                exitAnim = R.anim.slide_out_right;
-            }
+            NavigationTransitions.INSTANCE.navigateBackward(
+                    getSupportFragmentManager(), R.id.fragmentContainer, targetFragment);
         }
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.setCustomAnimations(enterAnim, exitAnim);
-        ft.replace(R.id.fragmentContainer, targetFragment);
-        ft.commit();
 
         currentSelectedId = targetId;
     }
