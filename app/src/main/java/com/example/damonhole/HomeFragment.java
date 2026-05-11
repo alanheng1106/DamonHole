@@ -59,7 +59,6 @@ public class HomeFragment extends BaseTabFragment {
     private LikedSongsManager likedManager;
     private View searchLoadingIndicator;
     private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh;
-    private View refreshIndicator;
 
     private SearchHistoryAdapter historyAdapter;
     private final List<String> searchHistory = new ArrayList<>();
@@ -96,14 +95,12 @@ public class HomeFragment extends BaseTabFragment {
         btnCreatePlaylist = view.findViewById(R.id.btnCreatePlaylist);
         searchLoadingIndicator = view.findViewById(R.id.progressIndicator);
 
-        // Setup SwipeRefreshLayout for pull-to-refresh (hide default spinner, use M3 LoadingIndicator)
+        // Setup SwipeRefreshLayout for pull-to-refresh (hide default spinner, use progressIndicator)
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
-        refreshIndicator = view.findViewById(R.id.refreshIndicator);
         swipeRefresh.setProgressViewOffset(true, 0, 0); // Hide default spinner off-screen
         swipeRefresh.setOnRefreshListener(() -> {
             swipeRefresh.setRefreshing(false); // Immediately hide default spinner
-            if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
-            loadRecentHits();
+            loadRecentHits(); // loadRecentHits shows searchLoadingIndicator (wave style)
         });
 
         view.findViewById(R.id.ivProfile).setOnClickListener(v -> {
@@ -251,7 +248,6 @@ public class HomeFragment extends BaseTabFragment {
             if (getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
                     if (searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.GONE);
-                    if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
                     if (!results.isEmpty()) {
                         tvSectionTitle.setVisibility(View.VISIBLE);
                         tvSectionTitle.setText(getString(R.string.recent_hits));
