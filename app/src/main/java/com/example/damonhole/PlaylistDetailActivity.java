@@ -93,10 +93,17 @@ public class PlaylistDetailActivity extends AppCompatActivity {
                             extractAndPlay(song.videoId);
                             return true;
                         case 2:
-                            songs.remove(song);
-                            PlaylistManager.getInstance(PlaylistDetailActivity.this)
-                                    .updatePlaylistSongs(playlistId, songs, currentSortOrder);
-                            applySorting(); // Refreshes adapter
+                            new androidx.appcompat.app.AlertDialog.Builder(PlaylistDetailActivity.this)
+                                    .setTitle(R.string.delete)
+                                    .setMessage(getString(R.string.delete_playlist_confirm, song.title))
+                                    .setPositiveButton(R.string.delete, (dialog, which) -> {
+                                        songs.remove(song);
+                                        PlaylistManager.getInstance(PlaylistDetailActivity.this)
+                                                .updatePlaylistSongs(playlistId, songs, currentSortOrder);
+                                        applySorting(); // Refreshes adapter
+                                    })
+                                    .setNegativeButton(R.string.cancel, null)
+                                    .show();
                             return true;
                         default:
                             return false;
