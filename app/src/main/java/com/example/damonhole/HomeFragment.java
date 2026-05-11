@@ -466,7 +466,7 @@ public class HomeFragment extends BaseTabFragment {
             tvGreeting.setTextColor(requireContext().getColor(android.R.color.tab_indicator_text)); // Fallback
             tvUserName.setTextColor(requireContext().getColor(android.R.color.primary_text_dark));
             
-            searchBar.setNavigationIconTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.md_theme_dark_onSurfaceVariant)));
+            tintSearchBarIcon(searchBar, getResources().getColor(R.color.md_theme_dark_onSurfaceVariant));
             progressIndicator.setIndicatorColor(getResources().getColor(R.color.md_theme_light_primary));
             return;
         }
@@ -478,7 +478,7 @@ public class HomeFragment extends BaseTabFragment {
 
         // SearchBar & SearchView
         searchBar.setCardBackgroundColor(android.content.res.ColorStateList.valueOf(palette.primaryContainer));
-        searchBar.setNavigationIconTintList(android.content.res.ColorStateList.valueOf(palette.onPrimaryContainer));
+        tintSearchBarIcon(searchBar, palette.onPrimaryContainer);
         searchBar.setHintTextColor(palette.onPrimaryContainer);
         
         searchView.setBackgroundColor(palette.surfaceContainer);
@@ -499,6 +499,15 @@ public class HomeFragment extends BaseTabFragment {
         RecyclerView rvHistory = getView().findViewById(R.id.rvSearchHistory);
         if (rvHistory != null && rvHistory.getAdapter() instanceof SearchHistoryAdapter) {
             ((SearchHistoryAdapter)rvHistory.getAdapter()).setThemePalette(palette);
+        }
+    }
+
+    private void tintSearchBarIcon(com.google.android.material.search.SearchBar searchBar, int color) {
+        android.graphics.drawable.Drawable icon = searchBar.getNavigationIcon();
+        if (icon != null) {
+            android.graphics.drawable.Drawable wrapped = androidx.core.graphics.drawable.DrawableCompat.wrap(icon).mutate();
+            androidx.core.graphics.drawable.DrawableCompat.setTint(wrapped, color);
+            searchBar.setNavigationIcon(wrapped);
         }
     }
 
