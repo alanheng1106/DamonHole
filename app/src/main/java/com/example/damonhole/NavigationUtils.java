@@ -99,8 +99,24 @@ public class NavigationUtils {
 
     private static void navigateTo(Activity activity, Class<?> targetClass) {
         Intent intent = new Intent(activity, targetClass);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        if (targetClass == MainActivity.class) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        }
         activity.startActivity(intent);
         activity.overridePendingTransition(0, 0);
+    }
+
+    /**
+     * Intercepts the back button to return to MainActivity instead of the previous tab.
+     */
+    public static void setupBackToHome(androidx.activity.ComponentActivity activity) {
+        activity.getOnBackPressedDispatcher().addCallback(activity, new androidx.activity.OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateTo(activity, MainActivity.class);
+            }
+        });
     }
 }

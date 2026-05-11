@@ -54,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         // M3 nav bar: set up once in onCreate, never again in onResume
         NavigationUtils.setupBottomNav(this);
+        NavigationUtils.setupBackToHome(this);
 
         // Clicks
         findViewById(R.id.itemUserProfile).setOnClickListener(v -> {

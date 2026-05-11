@@ -97,6 +97,7 @@ public class PlaylistsActivity extends AppCompatActivity {
         updateLikedSongsCount();
 
         NavigationUtils.setupBottomNav(this);
+        NavigationUtils.setupBackToHome(this);
     }
 
     private void toggleFabMenu() {

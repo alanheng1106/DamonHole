@@ -113,6 +113,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
         // M3 nav bar: set up once in onCreate
         NavigationUtils.setupBottomNav(this);
+        NavigationUtils.setupBackToHome(this);
     }
 
     private void setupArtworkAnimation() {
