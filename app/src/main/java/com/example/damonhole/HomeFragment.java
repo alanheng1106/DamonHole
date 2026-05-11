@@ -481,7 +481,7 @@ public class HomeFragment extends BaseTabFragment {
         // SearchBar & SearchView
         searchBar.setBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.primaryContainer));
         tintSearchBarIcon(searchBar, palette.onPrimaryContainer);
-        searchBar.setHintTextColor(palette.onPrimaryContainer);
+        // searchBar.setHintTextColor(palette.onPrimaryContainer); // SearchBar does not expose this directly
         
         searchView.setBackgroundColor(palette.surfaceContainer);
         searchView.getToolbar().setBackgroundColor(palette.surfaceContainer);
