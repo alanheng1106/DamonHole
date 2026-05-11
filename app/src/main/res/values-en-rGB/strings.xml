@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <resources>
     <string name="app_name">DamonHole</string>
     <string name="welcome">Welcome</string>
@@ -11,7 +12,6 @@
     <string name="lang_zh_cn">Chinese (Simplified)</string>
     <string name="lang_ms">Bahasa Melayu</string>
     <string name="logout">Logout</string>
-
     <string name="good_morning">Good morning!</string>
     <string name="good_afternoon">Good afternoon!</string>
     <string name="good_evening">Good evening!</string>
@@ -23,7 +23,6 @@
     <string name="liked_songs">Liked Songs</string>
     <string name="recent_hits">Recent Hits</string>
     <string name="create_new_playlist">Create New Playlist</string>
-
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email">E-Mail</string>
@@ -37,18 +36,15 @@
     <string name="password_mismatch">Passwords do not match</string>
     <string name="password_empty">Please fill all fields</string>
     <string name="update_password">UPDATE PASSWORD</string>
-
     <string name="now_playing">Now Playing</string>
     <string name="your_playlists">Your Playlists</string>
     <string name="songs_count">%d songs</string>
     <string name="playlist_details">By %1$s • %2$d Songs</string>
     <string name="no_liked_songs">No liked songs yet.\nTap heart on any song to save it here.</string>
-
     <string name="nav_home">Home</string>
     <string name="nav_playlists">Playlists</string>
     <string name="nav_now_playing">Playing</string>
     <string name="nav_settings">Settings</string>
-
     <string name="back">Back</string>
     <string name="create_playlist">Create Playlist</string>
     <string name="not_playing">Not Playing</string>
@@ -57,7 +53,6 @@
     <string name="no_songs_in_playlist">No songs in this playlist</string>
     <string name="default_user_name">User Name</string>
     <string name="default_email">demo@example.com</string>
-
     <string name="searching">Searching…</string>
     <string name="search_results">Search Results</string>
     <string name="search_failed">Search failed</string>
@@ -72,8 +67,6 @@
     <string name="playlist_deleted">Playlist deleted</string>
     <string name="rename_playlist">Rename Playlist</string>
     <string name="rename">Rename</string>
-
-    <!-- Welcome / Pre-login -->
     <string name="welcome_desc">Your ultimate destination for music discovery. Stream your favorite songs, create custom playlists, and enjoy a seamless audio experience anywhere, anytime.</string>
     <string name="get_started">GET STARTED</string>
     <string name="experience_music">Experience music like never before</string>
@@ -90,7 +83,6 @@
     <string name="no_account_prompt">Don\'t have an account? Sign up</string>
     <string name="already_have_account">Already have an account? Sign in</string>
     <string name="sign_up_btn">SIGN UP</string>
-
     <string name="playlist_empty">This playlist has no songs yet</string>
     <string name="player_not_ready">Player is not ready, try again</string>
     <string name="playing_playlist">Playing: %s</string>
@@ -103,37 +95,30 @@
     <string name="sort_title">Title</string>
     <string name="sort_artist">Artist</string>
     <string name="sort_date">Date Added</string>
-
-    <!-- FAQ -->
     <string name="faq_title">FAQ</string>
     <string name="faq_subtitle">We\'re here to help you with anything and everything on DamonHole</string>
     <string name="faq_search_hint">Search Help</string>
     <string name="faq_top_questions">Top Questions</string>
-
     <string name="faq_cat_playback">Playback</string>
     <string name="faq_cat_content">Content</string>
     <string name="faq_cat_playlists">Playlists</string>
     <string name="faq_cat_general">General</string>
-
     <string name="faq_q_bg_play">How do I play music in the background?</string>
     <string name="faq_a_bg_play">DamonHole is designed to keep playing even when you leave the app or turn off your screen. Just start a song and you\'re good to go!</string>
     <string name="faq_q_screen_off">Does it work with the screen off?</string>
     <string name="faq_a_screen_off">Yes! You can lock your phone and the music will continue to play uninterrupted.</string>
     <string name="faq_q_stop_unexpectedly">Why did the music stop unexpectedly?</string>
     <string name="faq_a_stop_unexpectedly">This is usually due to battery optimization. Please ensure DamonHole is excluded from \'Battery Optimization\' in your phone settings.</string>
-
     <string name="faq_q_is_free">Is this really free?</string>
     <string name="faq_a_is_free">Yes, DamonHole allows you to enjoy music without any premium subscriptions.</string>
     <string name="faq_q_source">Where does the music come from?</string>
     <string name="faq_a_source">The app streams high-quality audio content from YouTube\'s vast library.</string>
     <string name="faq_q_download">Can I download songs for offline use?</string>
     <string name="faq_a_download">Currently, DamonHole focuses on providing the best streaming experience. Offline support may be considered for future updates.</string>
-
     <string name="faq_q_create_playlist">How do I create a playlist?</string>
     <string name="faq_a_create_playlist">Go to the \'Playlists\' tab and tap the \'+\' button at the top to create and name your new collection.</string>
     <string name="faq_q_add_to_playlist">How do I add songs to a playlist?</string>
     <string name="faq_a_add_to_playlist">While searching or viewing songs, tap the menu (three dots) next to a song and select \'Add to Playlist\'.</string>
-
     <string name="faq_q_change_theme">How do I change the app theme?</string>
     <string name="faq_a_change_theme">Go to Settings and use the \'Dark Mode\' switch to toggle between light and dark themes.</string>
     <string name="faq_q_audio_quality">Can I change the audio quality?</string>
@@ -197,4 +182,7 @@
     <string name="equalizer_preset_clear">Clear</string>
     <string name="equalizer_preset_balance">Balance</string>
     <string name="equalizer_preset_custom">Custom</string>
+    <string name="play">Play</string>
+    <string name="unknown_title">Unknown Title</string>
+    <string name="unknown_artist">Unknown Artist</string>
 </resources>
