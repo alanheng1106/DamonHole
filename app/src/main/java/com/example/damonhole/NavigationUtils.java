@@ -94,17 +94,6 @@ public class NavigationUtils {
         if (activity instanceof PlaylistsActivity)  return R.id.nav_playlist;
         if (activity instanceof NowPlayingActivity) return R.id.nav_now_playing;
         if (activity instanceof SettingsActivity)   return R.id.nav_settings;
-        return -1;
-    }
-
-    private static int getTabIndex(Class<?> clazz) {
-        if (clazz == MainActivity.class) return 0;
-        if (clazz == PlaylistsActivity.class) return 1;
-        if (clazz == NowPlayingActivity.class) return 2;
-        if (clazz == SettingsActivity.class) return 3;
-        return -1;
-    }
-
     private static void navigateTo(Activity activity, Class<?> targetClass) {
         Intent intent = new Intent(activity, targetClass);
         if (targetClass == MainActivity.class) {
@@ -113,21 +102,7 @@ public class NavigationUtils {
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         }
         activity.startActivity(intent);
-
-        int currentIndex = getTabIndex(activity.getClass());
-        int targetIndex = getTabIndex(targetClass);
-
-        if (currentIndex != -1 && targetIndex != -1) {
-            if (targetIndex > currentIndex) {
-                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            } else if (targetIndex < currentIndex) {
-                activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            } else {
-                activity.overridePendingTransition(0, 0);
-            }
-        } else {
-            activity.overridePendingTransition(0, 0);
-        }
+        activity.overridePendingTransition(0, 0);
     }
 
     /**
