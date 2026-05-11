@@ -455,6 +455,22 @@ public class HomeFragment extends BaseTabFragment {
         return null;
     }
 
+    @Override
+    public void onThemeChanged(DynamicThemeManager.AppPalette palette) {
+        if (getView() == null) return;
+        
+        if (palette == null) {
+            getView().setBackgroundColor(Color.TRANSPARENT);
+            tvGreeting.setTextColor(requireContext().getColor(android.R.color.tab_indicator_text)); // Fallback
+            tvUserName.setTextColor(requireContext().getColor(android.R.color.primary_text_dark));
+            return;
+        }
+
+        getView().setBackgroundColor(palette.surfaceContainer);
+        tvGreeting.setTextColor(palette.onSurfaceVariant);
+        tvUserName.setTextColor(palette.onSurface);
+    }
+
     private static class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdapter.VH> {
         interface HistoryListener {
             void onQueryClick(String query);

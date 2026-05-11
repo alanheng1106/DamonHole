@@ -20,14 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.damonhole.ui.M3PullRefreshLayout;
 
 import com.google.android.material.color.DynamicColors;
+import com.example.damonhole.ui.DynamicThemeManager;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
+import android.graphics.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LikedSongsActivity extends AppCompatActivity {
+public class LikedSongsActivity extends AppCompatActivity implements DynamicThemeManager.ThemeChangeListener {
 
     private ListenableFuture<MediaController> controllerFuture;
     private MediaController controller;
@@ -59,6 +61,8 @@ public class LikedSongsActivity extends AppCompatActivity {
 
         loadingOverlay = findViewById(R.id.loadingOverlay);
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
+
+        DynamicThemeManager.getInstance().addListener(this);
 
         // Setup M3 PullRefreshLayout
         M3PullRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
@@ -165,6 +169,29 @@ public class LikedSongsActivity extends AppCompatActivity {
         int count = songs.size();
         tvCount.setText(getString(R.string.songs_count, count));
         tvEmpty.setVisibility(count == 0 ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DynamicThemeManager.getInstance().removeListener(this);
+    }
+
+    @Override
+    public void onThemeChanged(DynamicThemeManager.AppPalette palette) {
+        if (palette == null) {
+            findViewById(android.R.id.content).setBackgroundColor(Color.TRANSPARENT);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            return;
+        }
+
+        findViewById(android.R.id.content).setBackgroundColor(palette.surfaceContainer);
+        getWindow().setStatusBarColor(palette.surfaceContainer);
+        
+        tvCount.setTextColor(palette.onSurfaceVariant);
+        // Header title is usually static or has specific M3 coloring, but we can tint if needed.
+        // For LikedSongs, the title "Liked Songs" is in a TextView inside RelativeLayout.
+        // Let's find it.
     }
 
     private void extractAndPlay(String videoId) {

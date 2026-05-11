@@ -1,6 +1,7 @@
 package com.example.damonhole;
 
 import android.content.ComponentName;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.damonhole.ui.DynamicThemeManager;
 import com.example.damonhole.ui.M3PullRefreshLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.DynamicColors;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PlaylistDetailActivity extends AppCompatActivity {
+public class PlaylistDetailActivity extends AppCompatActivity implements DynamicThemeManager.ThemeChangeListener {
 
     private String playlistId;
     private String playlistName;
@@ -60,8 +62,10 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         loadingOverlay = findViewById(R.id.loadingOverlay);
 
         tvName.setText(playlistName);
-        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
         btnSort.setOnClickListener(this::showSortMenu);
+
+        DynamicThemeManager.getInstance().addListener(this);
 
         // Setup M3 PullRefreshLayout
         M3PullRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
@@ -236,5 +240,26 @@ public class PlaylistDetailActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         MediaController.releaseFuture(controllerFuture);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DynamicThemeManager.getInstance().removeListener(this);
+    }
+
+    @Override
+    public void onThemeChanged(DynamicThemeManager.AppPalette palette) {
+        if (palette == null) {
+            findViewById(android.R.id.content).setBackgroundColor(Color.TRANSPARENT);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            return;
+        }
+
+        findViewById(android.R.id.content).setBackgroundColor(palette.surfaceContainer);
+        getWindow().setStatusBarColor(palette.surfaceContainer);
+        
+        tvName.setTextColor(palette.onSurface);
+        if (tvSongCount != null) tvSongCount.setTextColor(palette.onSurfaceVariant);
     }
 }

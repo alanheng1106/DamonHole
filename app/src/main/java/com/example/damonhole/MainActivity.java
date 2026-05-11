@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.media3.session.MediaController;
 import androidx.media3.session.SessionToken;
+import com.example.damonhole.ui.DynamicThemeManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.color.DynamicColors;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -15,7 +16,7 @@ import com.google.common.util.concurrent.MoreExecutors;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DynamicThemeManager.ThemeChangeListener {
 
     private ListenableFuture<MediaController> controllerFuture;
     private MediaController controller;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             switchFragment(item.getItemId());
             return true;
         });
+
+        DynamicThemeManager.getInstance().addListener(this);
 
         // Handle Back button: if not on Home, go to Home
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -146,20 +149,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void updateBottomNavColors(int bgColor, int textColor, int subTextColor) {
-        bottomNav.setBackgroundColor(bgColor);
+    @Override
+    public void onThemeChanged(DynamicThemeManager.AppPalette palette) {
+        if (palette == null) {
+            // Revert to default
+            findViewById(android.R.id.content).setBackgroundColor(Color.TRANSPARENT);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            bottomNav.setBackgroundResource(R.color.nav_bg_default); // Assuming there's a default
+            return;
+        }
+
+        // Apply to Activity Root
+        findViewById(android.R.id.content).setBackgroundColor(palette.surfaceContainer);
+        getWindow().setStatusBarColor(palette.surfaceContainer);
+
+        // Apply to Bottom Nav
+        bottomNav.setBackgroundColor(palette.surfaceContainer);
+        
         android.content.res.ColorStateList navColorList = new android.content.res.ColorStateList(
                 new int[][] {
                         new int[] { android.R.attr.state_checked },
                         new int[] { -android.R.attr.state_checked }
                 },
                 new int[] {
-                        textColor,
-                        subTextColor
+                        palette.primaryContainer,
+                        palette.onSurfaceVariant
                 });
         bottomNav.setItemIconTintList(navColorList);
         bottomNav.setItemTextColor(navColorList);
-        bottomNav.setItemActiveIndicatorColor(android.content.res.ColorStateList.valueOf(textColor).withAlpha(31));
+        bottomNav.setItemActiveIndicatorColor(android.content.res.ColorStateList.valueOf(palette.primaryContainer).withAlpha(31));
+    }
+
+    public void updateBottomNavColors(int bgColor, int textColor, int subTextColor) {
+        // This method is now legacy, using onThemeChanged instead.
+        // But keeping it for now to avoid breaking existing calls before Refactor.
     }
 
     @Override

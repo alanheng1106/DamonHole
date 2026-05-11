@@ -283,7 +283,7 @@ public class NowPlayingFragment extends BaseTabFragment {
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         if (isAdded()) {
                             ivArtwork.setImageBitmap(resource);
-                            applyPalette(resource);
+                            DynamicThemeManager.getInstance().updatePalette(resource);
                         }
                     }
                     @Override
@@ -293,49 +293,41 @@ public class NowPlayingFragment extends BaseTabFragment {
                 });
         } else {
             ivArtwork.setImageResource(R.drawable.ic_music_note);
-            rootLayout.setBackgroundColor(Color.parseColor("#121212"));
+            DynamicThemeManager.getInstance().reset();
         }
     }
 
-    private void applyPalette(Bitmap bitmap) {
-        Palette.from(bitmap).generate(palette -> {
-            if (palette == null || !isAdded()) return;
-            
-            int bgColor = palette.getVibrantColor(
-                palette.getMutedColor(
-                    palette.getDominantColor(Color.parseColor("#121212"))
-                )
-            );
+    @Override
+    public void onThemeChanged(DynamicThemeManager.AppPalette palette) {
+        if (palette == null || !isAdded()) {
+            // Default look
+            rootLayout.setBackgroundColor(Color.parseColor("#121212"));
+            int white = Color.WHITE;
+            tvTitle.setTextColor(white);
+            tvArtist.setTextColor(Color.parseColor("#B3FFFFFF"));
+            return;
+        }
 
-            rootLayout.setBackgroundColor(bgColor);
+        rootLayout.setBackgroundColor(palette.surfaceContainer);
 
-            boolean isDark = isDark(bgColor);
-            int textColor = isDark ? Color.WHITE : Color.BLACK;
-            int subTextColor = isDark ? Color.parseColor("#B3FFFFFF") : Color.parseColor("#B3000000");
+        tvTitle.setTextColor(palette.onSurface);
+        tvArtist.setTextColor(palette.onSurfaceVariant);
+        tvPosition.setTextColor(palette.onSurfaceVariant);
+        tvDuration.setTextColor(palette.onSurfaceVariant);
 
-            tvTitle.setTextColor(textColor);
-            tvArtist.setTextColor(subTextColor);
-            tvPosition.setTextColor(subTextColor);
-            tvDuration.setTextColor(subTextColor);
-
-            android.content.res.ColorStateList iconColor = android.content.res.ColorStateList.valueOf(textColor);
-            btnPrev.setIconTint(iconColor);
-            btnNext.setIconTint(iconColor);
-            btnShuffle.setIconTint(iconColor);
-            btnRepeat.setIconTint(iconColor);
-            btnQueue.setIconTint(iconColor);
-            
-            seekSlider.setThumbTintList(iconColor);
-            seekSlider.setTrackActiveTintList(iconColor);
-            seekSlider.setTrackInactiveTintList(android.content.res.ColorStateList.valueOf(textColor).withAlpha(64));
-            
-            btnPlayPause.setSupportBackgroundTintList(android.content.res.ColorStateList.valueOf(textColor));
-            btnPlayPause.setImageTintList(android.content.res.ColorStateList.valueOf(bgColor));
-
-            if (getActivity() instanceof MainActivity) {
-                ((MainActivity) getActivity()).updateBottomNavColors(bgColor, textColor, subTextColor);
-            }
-        });
+        android.content.res.ColorStateList iconColor = android.content.res.ColorStateList.valueOf(palette.onSurface);
+        btnPrev.setIconTint(iconColor);
+        btnNext.setIconTint(iconColor);
+        btnShuffle.setIconTint(iconColor);
+        btnRepeat.setIconTint(iconColor);
+        btnQueue.setIconTint(iconColor);
+        
+        seekSlider.setThumbTintList(iconColor);
+        seekSlider.setTrackActiveTintList(iconColor);
+        seekSlider.setTrackInactiveTintList(iconColor.withAlpha(64));
+        
+        btnPlayPause.setSupportBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.onSurface));
+        btnPlayPause.setImageTintList(android.content.res.ColorStateList.valueOf(palette.surfaceContainer));
     }
 
     private boolean isDark(int color) {

@@ -114,4 +114,19 @@ public class SettingsFragment extends BaseTabFragment {
         startActivity(intent);
         requireActivity().finish();
     }
+
+    @Override
+    public void onThemeChanged(com.example.damonhole.ui.DynamicThemeManager.AppPalette palette) {
+        if (getView() == null) return;
+
+        if (palette == null) {
+            getView().setBackgroundColor(android.graphics.Color.TRANSPARENT);
+            tvUserName.setTextColor(android.graphics.Color.WHITE);
+            return;
+        }
+
+        getView().setBackgroundColor(palette.surfaceContainer);
+        tvUserName.setTextColor(palette.onSurface);
+        tvUserEmail.setTextColor(palette.onSurfaceVariant);
+    }
 }

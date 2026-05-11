@@ -63,6 +63,7 @@ public class PlaylistsFragment extends BaseTabFragment {
         tvLikedSongsCount = view.findViewById(R.id.tvLikedSongsCount);
         rvPlaylists = view.findViewById(R.id.rvPlaylists);
         progressIndicator = view.findViewById(R.id.progressIndicator);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
 
         view.findViewById(R.id.cardLikedSongs).setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), LikedSongsActivity.class)));
@@ -244,6 +245,24 @@ public class PlaylistsFragment extends BaseTabFragment {
             return matcher.group(1);
         }
         return null;
+    }
+
+    @Override
+    public void onThemeChanged(DynamicThemeManager.AppPalette palette) {
+        if (getView() == null) return;
+
+        TextView tvTitle = getView().findViewById(R.id.tvTitle);
+        TextView tvYourPlaylists = getView().findViewById(R.id.tvYourPlaylists);
+
+        if (palette == null) {
+            getView().setBackgroundColor(Color.TRANSPARENT);
+            if (tvTitle != null) tvTitle.setTextColor(Color.WHITE);
+            return;
+        }
+
+        getView().setBackgroundColor(palette.surfaceContainer);
+        if (tvTitle != null) tvTitle.setTextColor(palette.onSurface);
+        if (tvYourPlaylists != null) tvYourPlaylists.setTextColor(palette.onSurface);
     }
 
     private void setupRecyclerView() {
