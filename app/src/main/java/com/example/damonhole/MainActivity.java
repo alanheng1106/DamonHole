@@ -101,21 +101,24 @@ public class MainActivity extends AppCompatActivity {
         Fragment targetFragment = fragments.get(targetId);
         if (targetFragment == null) return;
 
-        // Get the currently displayed fragment (null on first call)
-        Fragment currentFragment = fragments.get(currentSelectedId);
-        if (currentFragment == targetFragment) currentFragment = null;
-
         int currentPos = getPosition(currentSelectedId);
         int targetPos  = getPosition(targetId);
-        boolean isForward = targetPos > currentPos;
 
-        NavigationTransitions.INSTANCE.switchTab(
-                getSupportFragmentManager(),
-                R.id.fragmentContainer,
-                currentFragment,
-                targetFragment,
-                isForward
-        );
+        int enterAnim, exitAnim;
+        if (targetPos > currentPos) {
+            // Forward: slide in from right, parallax exit left
+            enterAnim = R.anim.slide_in_right;
+            exitAnim  = R.anim.slide_out_left;
+        } else {
+            // Backward: slide in from left (parallax return), slide out right
+            enterAnim = R.anim.slide_in_left;
+            exitAnim  = R.anim.slide_out_right;
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(enterAnim, exitAnim)
+                .replace(R.id.fragmentContainer, targetFragment)
+                .commit();
 
         currentSelectedId = targetId;
     }
