@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.damonhole.ui.M3PullRefreshLayout;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.color.DynamicColors;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 
