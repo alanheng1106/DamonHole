@@ -18,7 +18,8 @@ public class NavigationUtils {
      */
     public static void setupBottomNav(Activity activity) {
         BottomNavigationView navView = activity.findViewById(R.id.bottomNavigationView);
-        if (navView == null) return;
+        if (navView == null)
+            return;
 
         // Edge-to-edge: extend behind the system gesture bar
         ViewCompat.setOnApplyWindowInsetsListener(navView, (v, windowInsets) -> {
@@ -40,16 +41,20 @@ public class NavigationUtils {
         navView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                if (!(activity instanceof MainActivity)) navigateTo(activity, MainActivity.class);
+                if (!(activity instanceof MainActivity))
+                    navigateTo(activity, MainActivity.class);
                 return true;
             } else if (id == R.id.nav_playlist) {
-                if (!(activity instanceof PlaylistsActivity)) navigateTo(activity, PlaylistsActivity.class);
+                if (!(activity instanceof PlaylistsActivity))
+                    navigateTo(activity, PlaylistsActivity.class);
                 return true;
             } else if (id == R.id.nav_now_playing) {
-                if (!(activity instanceof NowPlayingActivity)) navigateTo(activity, NowPlayingActivity.class);
+                if (!(activity instanceof NowPlayingActivity))
+                    navigateTo(activity, NowPlayingActivity.class);
                 return true;
             } else if (id == R.id.nav_settings) {
-                if (!(activity instanceof SettingsActivity)) navigateTo(activity, SettingsActivity.class);
+                if (!(activity instanceof SettingsActivity))
+                    navigateTo(activity, SettingsActivity.class);
                 return true;
             }
             return false;
@@ -62,7 +67,8 @@ public class NavigationUtils {
      */
     public static void syncBottomNavSelection(Activity activity) {
         BottomNavigationView navView = activity.findViewById(R.id.bottomNavigationView);
-        if (navView == null) return;
+        if (navView == null)
+            return;
 
         int targetId = getTargetId(activity);
         if (targetId != -1 && navView.getSelectedItemId() != targetId) {
@@ -72,16 +78,20 @@ public class NavigationUtils {
             navView.setOnItemSelectedListener(item -> {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
-                    if (!(activity instanceof MainActivity)) navigateTo(activity, MainActivity.class);
+                    if (!(activity instanceof MainActivity))
+                        navigateTo(activity, MainActivity.class);
                     return true;
                 } else if (id == R.id.nav_playlist) {
-                    if (!(activity instanceof PlaylistsActivity)) navigateTo(activity, PlaylistsActivity.class);
+                    if (!(activity instanceof PlaylistsActivity))
+                        navigateTo(activity, PlaylistsActivity.class);
                     return true;
                 } else if (id == R.id.nav_now_playing) {
-                    if (!(activity instanceof NowPlayingActivity)) navigateTo(activity, NowPlayingActivity.class);
+                    if (!(activity instanceof NowPlayingActivity))
+                        navigateTo(activity, NowPlayingActivity.class);
                     return true;
                 } else if (id == R.id.nav_settings) {
-                    if (!(activity instanceof SettingsActivity)) navigateTo(activity, SettingsActivity.class);
+                    if (!(activity instanceof SettingsActivity))
+                        navigateTo(activity, SettingsActivity.class);
                     return true;
                 }
                 return false;
@@ -94,6 +104,9 @@ public class NavigationUtils {
         if (activity instanceof PlaylistsActivity)  return R.id.nav_playlist;
         if (activity instanceof NowPlayingActivity) return R.id.nav_now_playing;
         if (activity instanceof SettingsActivity)   return R.id.nav_settings;
+        return -1;
+    }
+
     private static void navigateTo(Activity activity, Class<?> targetClass) {
         Intent intent = new Intent(activity, targetClass);
         if (targetClass == MainActivity.class) {
@@ -106,7 +119,8 @@ public class NavigationUtils {
     }
 
     /**
-     * Intercepts the back button to return to MainActivity instead of the previous tab.
+     * Intercepts the back button to return to MainActivity instead of the previous
+     * tab.
      */
     public static void setupBackToHome(androidx.activity.ComponentActivity activity) {
         activity.getOnBackPressedDispatcher().addCallback(activity, new androidx.activity.OnBackPressedCallback(true) {
