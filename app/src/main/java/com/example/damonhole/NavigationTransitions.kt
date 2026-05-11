@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.view.View
-import android.view.ViewTreeObserver
 import android.view.animation.Interpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -12,7 +11,6 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
 /**
  * PixelPlayer-style navigation transitions.
- * Uses add/show/hide with OnPreDrawListener to guarantee no flash.
  */
 object NavigationTransitions {
 
@@ -27,7 +25,7 @@ object NavigationTransitions {
         targetFragment: Fragment,
         isForward: Boolean
     ) {
-        // Cancel any in-progress animation and snap everything clean
+        // 1. Cancel any in-progress animation
         activeAnimator?.let { anim ->
             anim.removeAllUpdateListeners()
             anim.removeAllListeners()
@@ -35,34 +33,36 @@ object NavigationTransitions {
             activeAnimator = null
         }
 
-        // Reset all fragment views to clean state
+        // 2. Reset and hide all fragments EXCEPT current and target
+        //    Don't touch target's view at all — we'll handle it after commitNow
         fm.fragments.forEach { frag ->
-            frag.view?.apply {
-                translationX = 0f
-                alpha = 1f
-                scaleX = 1f
-                scaleY = 1f
-                visibility = if (frag === currentFragment || frag === targetFragment) View.VISIBLE else View.GONE
+            if (frag !== currentFragment && frag !== targetFragment && frag.isAdded) {
+                frag.view?.apply {
+                    translationX = 0f; alpha = 1f; scaleX = 1f; scaleY = 1f
+                }
+                fm.beginTransaction().hide(frag).commitNow()
             }
         }
 
-        // Capture exit view BEFORE any transaction
+        // 3. Ensure current fragment's view is at clean state for exit animation
         val exitView = currentFragment?.view
+        exitView?.apply {
+            translationX = 0f; alpha = 1f; scaleX = 1f; scaleY = 1f
+        }
 
-        // Add or show the target fragment
+        // 4. Show/add the target fragment
         val tx = fm.beginTransaction()
         if (!targetFragment.isAdded) {
             tx.add(containerId, targetFragment)
         } else {
             tx.show(targetFragment)
         }
-        // Don't hide current yet — we need it for exit animation
         tx.commitNow()
 
+        // 5. NOW set target's initial off-screen state (same thread = before any draw)
         val enterView = targetFragment.view ?: return
         val w = enterView.resources.displayMetrics.widthPixels.toFloat()
 
-        // Immediately set enter view off-screen and invisible (before any draw)
         if (isForward) {
             enterView.translationX = w
         } else {
@@ -72,7 +72,7 @@ object NavigationTransitions {
         }
         enterView.alpha = 0f
 
-        // Start animation on next frame via post (view is already alpha=0 so no flash)
+        // 6. Animate on next frame
         enterView.post {
             val anim = ValueAnimator.ofFloat(0f, 1f).apply {
                 duration = DURATION_MS
@@ -108,15 +108,12 @@ object NavigationTransitions {
             anim.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     activeAnimator = null
-                    // Reset and hide exiting fragment
                     exitView?.apply {
-                        translationX = 0f; alpha = 1f
-                        scaleX = 1f; scaleY = 1f
+                        translationX = 0f; alpha = 1f; scaleX = 1f; scaleY = 1f
                     }
                     if (currentFragment != null && currentFragment.isAdded) {
                         fm.beginTransaction().hide(currentFragment).commitAllowingStateLoss()
                     }
-                    // Ensure enter view is at rest
                     enterView.translationX = 0f
                     enterView.alpha = 1f
                     enterView.scaleX = 1f
