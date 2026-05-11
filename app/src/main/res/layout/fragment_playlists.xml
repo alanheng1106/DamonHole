@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <!-- M3 Loading Indicator (shown during pull-to-refresh) -->
+    <!-- M3 Contained Loading Indicator (shown during pull-to-refresh) -->
     <com.google.android.material.loadingindicator.LoadingIndicator
         android:id="@+id/refreshIndicator"
         android:layout_width="48dp"
@@ -16,7 +16,9 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="60dp"
         android:visibility="gone"
-        app:indicatorColor="?attr/colorPrimary" />
+        app:indicatorColor="?attr/colorPrimary"
+        app:containerColor="?attr/colorSurfaceContainerHighest"
+        app:containerCornerRadius="24dp" />
 
     <!-- SwipeRefreshLayout for pull-to-refresh -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
