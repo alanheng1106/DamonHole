@@ -394,7 +394,7 @@ public class HomeFragment extends BaseTabFragment {
     }
 
     private void extractAndPlay(String title, String author, String videoId) {
-        MediaController controller = getMediaController();
+        MediaController controller = getMusicController();
         if (controller == null) return;
         List<SongItem> allSongs = songAdapter.getSongs();
         if (allSongs == null || allSongs.isEmpty()) return;

@@ -234,7 +234,7 @@ public class PlaylistsFragment extends BaseTabFragment {
                     Toast.makeText(requireContext(), getString(R.string.playlist_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                MediaController controller = getMediaController();
+                MediaController controller = getMusicController();
                 if (controller == null) {
                     Toast.makeText(requireContext(), getString(R.string.player_not_ready), Toast.LENGTH_SHORT).show();
                     return;

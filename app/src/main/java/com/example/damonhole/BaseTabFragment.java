@@ -9,9 +9,9 @@ import androidx.media3.session.MediaController;
  */
 public abstract class BaseTabFragment extends Fragment {
     
-    public MediaController getMediaController() {
+    public MediaController getMusicController() {
         if (getActivity() instanceof MainActivity) {
-            return ((MainActivity) getActivity()).getMediaController();
+            return ((MainActivity) getActivity()).getMusicController();
         }
         return null;
     }

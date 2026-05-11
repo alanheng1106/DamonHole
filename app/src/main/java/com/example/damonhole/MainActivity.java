@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         return 0;
     }
 
-    public MediaController getMediaController() {
+    public MediaController getMusicController() {
         return controller;
     }
 

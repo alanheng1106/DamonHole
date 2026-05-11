@@ -138,26 +138,26 @@ public class NowPlayingFragment extends BaseTabFragment {
 
     private void setupControls() {
         btnPlayPause.setOnClickListener(v -> {
-            MediaController controller = getMediaController();
+            MediaController controller = getMusicController();
             if (controller == null) return;
             if (controller.isPlaying()) controller.pause();
             else controller.play();
         });
 
         btnPrev.setOnClickListener(v -> {
-            MediaController controller = getMediaController();
+            MediaController controller = getMusicController();
             if (controller == null) return;
             if (controller.getCurrentPosition() > 3_000) controller.seekTo(0);
             else controller.seekToPreviousMediaItem();
         });
 
         btnNext.setOnClickListener(v -> {
-            MediaController controller = getMediaController();
+            MediaController controller = getMusicController();
             if (controller != null) controller.seekToNextMediaItem();
         });
 
         btnShuffle.setOnClickListener(v -> {
-            MediaController controller = getMediaController();
+            MediaController controller = getMusicController();
             if (controller == null) return;
             boolean shuffle = !controller.getShuffleModeEnabled();
             controller.setShuffleModeEnabled(shuffle);
@@ -165,7 +165,7 @@ public class NowPlayingFragment extends BaseTabFragment {
         });
 
         btnRepeat.setOnClickListener(v -> {
-            MediaController controller = getMediaController();
+            MediaController controller = getMusicController();
             if (controller == null) return;
             int next;
             switch (controller.getRepeatMode()) {
@@ -196,7 +196,7 @@ public class NowPlayingFragment extends BaseTabFragment {
             }
             @Override
             public void onStopTrackingTouch(@NonNull Slider slider) {
-                MediaController controller = getMediaController();
+                MediaController controller = getMusicController();
                 if (controller != null) {
                     controller.seekTo((long) slider.getValue());
                 }
@@ -229,14 +229,14 @@ public class NowPlayingFragment extends BaseTabFragment {
     public void onDestroyView() {
         super.onDestroyView();
         handler.removeCallbacks(seekUpdater);
-        MediaController controller = getMediaController();
+        MediaController controller = getMusicController();
         if (controller != null) {
             controller.removeListener(playerListener);
         }
     }
 
     private void updateMetadataUI() {
-        MediaController controller = getMediaController();
+        MediaController controller = getMusicController();
         if (controller == null || controller.getCurrentMediaItem() == null) return;
         MediaMetadata meta = controller.getCurrentMediaItem().mediaMetadata;
 
@@ -355,7 +355,7 @@ public class NowPlayingFragment extends BaseTabFragment {
     }
 
     private void updateSeekBar() {
-        MediaController controller = getMediaController();
+        MediaController controller = getMusicController();
         if (controller == null || userIsDragging) return;
         long duration = controller.getDuration();
         long position = controller.getCurrentPosition();
