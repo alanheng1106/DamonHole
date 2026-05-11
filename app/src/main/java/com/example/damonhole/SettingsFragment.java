@@ -87,9 +87,6 @@ public class SettingsFragment extends BaseTabFragment {
             }
         });
 
-        view.findViewById(R.id.itemComposeDemo).setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(), AboutComposeActivity.class));
-        });
     }
 
     private void fetchUserInfo() {
