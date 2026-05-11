@@ -25,7 +25,7 @@ object NavigationTransitions {
         targetFragment: Fragment,
         isForward: Boolean
     ) {
-        // 1. Cancel any in-progress animation
+        // 1. Cancel any in-progress animation and snap clean
         activeAnimator?.let { anim ->
             anim.removeAllUpdateListeners()
             anim.removeAllListeners()
@@ -33,24 +33,21 @@ object NavigationTransitions {
             activeAnimator = null
         }
 
-        // 2. Reset and hide all fragments EXCEPT current and target
-        //    Don't touch target's view at all — we'll handle it after commitNow
+        // 2. Clean up all fragment views
         fm.fragments.forEach { frag ->
-            if (frag !== currentFragment && frag !== targetFragment && frag.isAdded) {
-                frag.view?.apply {
-                    translationX = 0f; alpha = 1f; scaleX = 1f; scaleY = 1f
-                }
-                fm.beginTransaction().hide(frag).commitNow()
+            frag.view?.apply {
+                translationX = 0f; alpha = 1f; scaleX = 1f; scaleY = 1f
             }
         }
 
-        // 3. Ensure current fragment's view is at clean state for exit animation
-        val exitView = currentFragment?.view
-        exitView?.apply {
-            translationX = 0f; alpha = 1f; scaleX = 1f; scaleY = 1f
-        }
+        // 3. BEFORE the transaction: pre-hide target's existing view
+        //    so show() can't flash it (show() only sets visibility, not alpha)
+        targetFragment.view?.alpha = 0f
 
-        // 4. Show/add the target fragment
+        // 4. Capture exit view reference
+        val exitView = currentFragment?.view
+
+        // 5. Perform fragment transaction
         val tx = fm.beginTransaction()
         if (!targetFragment.isAdded) {
             tx.add(containerId, targetFragment)
@@ -59,20 +56,23 @@ object NavigationTransitions {
         }
         tx.commitNow()
 
-        // 5. NOW set target's initial off-screen state (same thread = before any draw)
+        // 6. Get enter view (now guaranteed to exist after commitNow)
         val enterView = targetFragment.view ?: return
         val w = enterView.resources.displayMetrics.widthPixels.toFloat()
 
+        // 7. Set initial off-screen state (alpha already 0 from step 3 or default)
+        enterView.alpha = 0f
         if (isForward) {
             enterView.translationX = w
+            enterView.scaleX = 1f
+            enterView.scaleY = 1f
         } else {
             enterView.translationX = -w * 0.33f
             enterView.scaleX = 0.9f
             enterView.scaleY = 0.9f
         }
-        enterView.alpha = 0f
 
-        // 6. Animate on next frame
+        // 8. Animate on next frame
         enterView.post {
             val anim = ValueAnimator.ofFloat(0f, 1f).apply {
                 duration = DURATION_MS
@@ -81,7 +81,6 @@ object NavigationTransitions {
 
             anim.addUpdateListener { va ->
                 val f = va.animatedFraction
-                // Enter
                 if (isForward) {
                     enterView.translationX = w * (1f - f)
                     enterView.alpha = f
@@ -91,7 +90,6 @@ object NavigationTransitions {
                     enterView.scaleX = 0.9f + 0.1f * f
                     enterView.scaleY = 0.9f + 0.1f * f
                 }
-                // Exit (parallax)
                 exitView?.let { ev ->
                     if (isForward) {
                         ev.translationX = -w * 0.33f * f
