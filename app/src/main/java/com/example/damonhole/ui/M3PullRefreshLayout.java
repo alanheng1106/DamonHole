@@ -205,6 +205,12 @@ public class M3PullRefreshLayout extends FrameLayout {
         this.onRefreshListener = listener;
     }
 
+    public void setIndicatorColor(int color) {
+        if (loadingIndicator instanceof com.google.android.material.progressindicator.CircularProgressIndicator) {
+            ((com.google.android.material.progressindicator.CircularProgressIndicator)loadingIndicator).setIndicatorColor(color);
+        }
+    }
+
     private boolean canChildScrollUp() {
         return scrollableChild.canScrollVertically(-1);
     }

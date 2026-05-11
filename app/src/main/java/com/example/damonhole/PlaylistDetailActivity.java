@@ -261,5 +261,19 @@ public class PlaylistDetailActivity extends AppCompatActivity implements Dynamic
         
         tvName.setTextColor(palette.onSurface);
         if (tvSongCount != null) tvSongCount.setTextColor(palette.onSurfaceVariant);
+        if (tvEmpty != null) tvEmpty.setTextColor(palette.onSurfaceVariant);
+
+        // Progress Indicator
+        if (loadingOverlay != null) {
+            View progress = loadingOverlay.findViewById(R.id.progressIndicator);
+            if (progress instanceof com.google.android.material.progressindicator.CircularProgressIndicator) {
+                ((com.google.android.material.progressindicator.CircularProgressIndicator)progress).setIndicatorColor(palette.primaryContainer);
+            }
+        }
+
+        // Adapter
+        if (adapter != null) {
+            adapter.setThemePalette(palette);
+        }
     }
 }

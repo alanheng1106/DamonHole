@@ -16,6 +16,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     private List<SongItem> songs = new ArrayList<>();
     private final OnSongClickListener listener;
     private boolean showDragHandle = false;
+    private com.example.damonhole.ui.DynamicThemeManager.AppPalette currentPalette;
 
     public interface OnSongClickListener {
         void onSongClick(SongItem song);
@@ -56,6 +57,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         notifyDataSetChanged();
     }
 
+    public void setThemePalette(com.example.damonhole.ui.DynamicThemeManager.AppPalette palette) {
+        this.currentPalette = palette;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -85,6 +91,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         } else {
             holder.btnMore.setVisibility(View.VISIBLE);
             holder.ivDragHandle.setVisibility(View.GONE);
+        }
+
+        if (currentPalette != null) {
+            holder.tvTitle.setTextColor(currentPalette.onSurface);
+            holder.tvAuthor.setTextColor(currentPalette.onSurfaceVariant);
+            holder.btnMore.setIconTint(android.content.res.ColorStateList.valueOf(currentPalette.onSurfaceVariant));
+            if (holder.ivDragHandle != null) {
+                holder.ivDragHandle.setColorFilter(currentPalette.onSurfaceVariant);
+            }
         }
     }
 

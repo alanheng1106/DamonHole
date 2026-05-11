@@ -189,9 +189,24 @@ public class LikedSongsActivity extends AppCompatActivity implements DynamicThem
         getWindow().setStatusBarColor(palette.surfaceContainer);
         
         tvCount.setTextColor(palette.onSurfaceVariant);
-        // Header title is usually static or has specific M3 coloring, but we can tint if needed.
-        // For LikedSongs, the title "Liked Songs" is in a TextView inside RelativeLayout.
-        // Let's find it.
+        if (tvEmpty != null) tvEmpty.setTextColor(palette.onSurfaceVariant);
+
+        // Header title
+        TextView tvTitle = findViewById(R.id.tvTitle);
+        if (tvTitle != null) tvTitle.setTextColor(palette.onSurface);
+
+        // Progress Indicator
+        if (loadingOverlay != null) {
+            View progress = loadingOverlay.findViewById(R.id.progressIndicator);
+            if (progress instanceof com.google.android.material.progressindicator.CircularProgressIndicator) {
+                ((com.google.android.material.progressindicator.CircularProgressIndicator)progress).setIndicatorColor(palette.primaryContainer);
+            }
+        }
+
+        // Adapter
+        if (adapter != null) {
+            adapter.setThemePalette(palette);
+        }
     }
 
     private void extractAndPlay(String videoId) {
@@ -232,6 +247,7 @@ public class LikedSongsActivity extends AppCompatActivity implements DynamicThem
         private List<SongItem> songs;
         private final OnSongClick   onSongClick;
         private final OnUnlikeClick onUnlike;
+        private DynamicThemeManager.AppPalette currentPalette;
 
         LikedAdapter(List<SongItem> songs, OnSongClick click, OnUnlikeClick unlike) {
             this.songs       = songs;
@@ -241,6 +257,11 @@ public class LikedSongsActivity extends AppCompatActivity implements DynamicThem
 
         void updateSongs(List<SongItem> newSongs) {
             this.songs = newSongs;
+            notifyDataSetChanged();
+        }
+
+        void setThemePalette(DynamicThemeManager.AppPalette palette) {
+            this.currentPalette = palette;
             notifyDataSetChanged();
         }
 
@@ -269,6 +290,12 @@ public class LikedSongsActivity extends AppCompatActivity implements DynamicThem
                     
             holder.itemView.setOnClickListener(v -> onSongClick.onSongClick(song));
             holder.btnUnlike.setOnClickListener(v -> onUnlike.onUnlike(song.videoId));
+
+            if (currentPalette != null) {
+                holder.tvTitle.setTextColor(currentPalette.onSurface);
+                holder.tvAuthor.setTextColor(currentPalette.onSurfaceVariant);
+                holder.btnUnlike.setIconTint(android.content.res.ColorStateList.valueOf(currentPalette.onSurfaceVariant));
+            }
         }
 
         @Override public int getItemCount() { return songs.size(); }

@@ -316,18 +316,19 @@ public class NowPlayingFragment extends BaseTabFragment {
         tvPosition.setTextColor(palette.onSurfaceVariant);
         tvDuration.setTextColor(palette.onSurfaceVariant);
 
-        android.content.res.ColorStateList iconColor = android.content.res.ColorStateList.valueOf(palette.onSurface);
-        btnPrev.setIconTint(iconColor);
-        btnNext.setIconTint(iconColor);
-        btnShuffle.setIconTint(iconColor);
-        btnRepeat.setIconTint(iconColor);
-        btnQueue.setIconTint(iconColor);
+        android.content.res.ColorStateList onSurfaceColor = android.content.res.ColorStateList.valueOf(palette.onSurface);
+        btnPrev.setIconTint(onSurfaceColor);
+        btnNext.setIconTint(onSurfaceColor);
+        btnShuffle.setIconTint(onSurfaceColor);
+        btnRepeat.setIconTint(onSurfaceColor);
+        btnQueue.setIconTint(onSurfaceColor);
+        btnLike.setIconTint(onSurfaceColor);
         
-        seekSlider.setThumbTintList(iconColor);
-        seekSlider.setTrackActiveTintList(iconColor);
-        seekSlider.setTrackInactiveTintList(iconColor.withAlpha(64));
+        seekSlider.setThumbTintList(onSurfaceColor);
+        seekSlider.setTrackActiveTintList(onSurfaceColor);
+        seekSlider.setTrackInactiveTintList(onSurfaceColor.withAlpha(64));
         
-        btnPlayPause.setSupportBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.onSurface));
+        btnPlayPause.setSupportBackgroundTintList(onSurfaceColor);
         btnPlayPause.setImageTintList(android.content.res.ColorStateList.valueOf(palette.surfaceContainer));
     }
 

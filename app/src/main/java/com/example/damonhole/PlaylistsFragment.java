@@ -259,12 +259,59 @@ public class PlaylistsFragment extends BaseTabFragment {
         if (palette == null) {
             getView().setBackgroundColor(Color.TRANSPARENT);
             if (tvTitle != null) tvTitle.setTextColor(Color.WHITE);
+            fabMain.setBackgroundTintList(null);
             return;
         }
 
         getView().setBackgroundColor(palette.surfaceContainer);
         if (tvTitle != null) tvTitle.setTextColor(palette.onSurface);
         if (tvYourPlaylists != null) tvYourPlaylists.setTextColor(palette.onSurface);
+
+        // Progress Indicator
+        if (progressIndicator != null) {
+            ((com.google.android.material.progressindicator.CircularProgressIndicator)progressIndicator)
+                .setIndicatorColor(palette.primaryContainer);
+        }
+        
+        // Pull Refresh
+        if (swipeRefresh != null) {
+            swipeRefresh.setIndicatorColor(palette.primaryContainer);
+        }
+
+        // FABs
+        fabMain.setBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.primaryContainer));
+        fabMain.setImageTintList(android.content.res.ColorStateList.valueOf(palette.onPrimaryContainer));
+        
+        fabCreate.setBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.accent));
+        fabCreate.setImageTintList(android.content.res.ColorStateList.valueOf(palette.accentContrast));
+        
+        fabImport.setBackgroundTintList(android.content.res.ColorStateList.valueOf(palette.accent));
+        fabImport.setImageTintList(android.content.res.ColorStateList.valueOf(palette.accentContrast));
+
+        // FAB Labels
+        updateFabLabel(layoutFabCreate, palette);
+        updateFabLabel(layoutFabImport, palette);
+
+        // Adapter
+        if (adapter != null) {
+            adapter.setThemePalette(palette);
+        }
+    }
+
+    private void updateFabLabel(View layout, DynamicThemeManager.AppPalette palette) {
+        if (layout == null) return;
+        for (int i = 0; i < ((ViewGroup)layout).getChildCount(); i++) {
+            View child = ((ViewGroup)layout).getChildAt(i);
+            if (child instanceof com.google.android.material.card.MaterialCardView) {
+                ((com.google.android.material.card.MaterialCardView)child).setCardBackgroundColor(android.content.res.ColorStateList.valueOf(palette.surfaceContainer));
+                ((com.google.android.material.card.MaterialCardView)child).setStrokeColor(android.content.res.ColorStateList.valueOf(palette.divider));
+                ((com.google.android.material.card.MaterialCardView)child).setStrokeWidth(1);
+                View inner = ((ViewGroup)child).getChildAt(0);
+                if (inner instanceof TextView) {
+                    ((TextView)inner).setTextColor(palette.onSurface);
+                }
+            }
+        }
     }
 
     private void setupRecyclerView() {

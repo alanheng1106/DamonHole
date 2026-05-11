@@ -17,15 +17,19 @@ public class DynamicThemeManager {
         @ColorInt public final int onSurface;
         @ColorInt public final int onSurfaceVariant;
         @ColorInt public final int accent;
+        @ColorInt public final int accentContrast;
+        @ColorInt public final int divider;
         public final boolean isDark;
 
-        public AppPalette(int primaryContainer, int onPrimaryContainer, int surfaceContainer, int onSurface, int onSurfaceVariant, int accent, boolean isDark) {
+        public AppPalette(int primaryContainer, int onPrimaryContainer, int surfaceContainer, int onSurface, int onSurfaceVariant, int accent, int accentContrast, int divider, boolean isDark) {
             this.primaryContainer = primaryContainer;
             this.onPrimaryContainer = onPrimaryContainer;
             this.surfaceContainer = surfaceContainer;
             this.onSurface = onSurface;
             this.onSurfaceVariant = onSurfaceVariant;
             this.accent = accent;
+            this.accentContrast = accentContrast;
+            this.divider = divider;
             this.isDark = isDark;
         }
     }
@@ -77,6 +81,8 @@ public class DynamicThemeManager {
             int onSurface = getContrastColor(surfaceContainer);
             int onSurfaceVariant = ColorUtils.blendARGB(onSurface, surfaceContainer, 0.3f);
             int accent = palette.getLightVibrantColor(palette.getLightMutedColor(vibrant));
+            int accentContrast = getContrastColor(accent);
+            int divider = ColorUtils.blendARGB(onSurface, surfaceContainer, 0.8f);
 
             currentPalette = new AppPalette(
                 primaryContainer,
@@ -85,6 +91,8 @@ public class DynamicThemeManager {
                 onSurface,
                 onSurfaceVariant,
                 accent,
+                accentContrast,
+                divider,
                 isDarkBackground
             );
 

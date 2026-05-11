@@ -15,6 +15,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
     private List<Playlist> playlists = new ArrayList<>();
     private final OnPlaylistClickListener listener;
+    private com.example.damonhole.ui.DynamicThemeManager.AppPalette currentPalette;
 
     public interface OnPlaylistClickListener {
         void onPlaylistClick(Playlist playlist);
@@ -28,6 +29,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
     public void setPlaylists(List<Playlist> newPlaylists) {
         this.playlists = newPlaylists;
+        notifyDataSetChanged();
+    }
+
+    public void setThemePalette(com.example.damonhole.ui.DynamicThemeManager.AppPalette palette) {
+        this.currentPalette = palette;
         notifyDataSetChanged();
     }
 
@@ -62,6 +68,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
         // More button click
         holder.btnMore.setOnClickListener(v -> listener.onMoreClick(v, playlist));
+
+        if (currentPalette != null) {
+            holder.card.setCardBackgroundColor(android.content.res.ColorStateList.valueOf(currentPalette.surfaceContainer));
+            holder.tvName.setTextColor(currentPalette.onSurface);
+            holder.tvDetails.setTextColor(currentPalette.onSurfaceVariant);
+            if (holder.btnMore instanceof android.widget.ImageView) {
+                ((android.widget.ImageView) holder.btnMore).setColorFilter(currentPalette.onSurfaceVariant);
+            }
+        }
     }
 
     @Override

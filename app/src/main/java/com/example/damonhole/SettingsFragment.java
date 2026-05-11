@@ -120,14 +120,23 @@ public class SettingsFragment extends BaseTabFragment {
     public void onThemeChanged(com.example.damonhole.ui.DynamicThemeManager.AppPalette palette) {
         if (getView() == null) return;
 
+        com.google.android.material.card.MaterialCardView cardSettings = getView().findViewById(R.id.cardSettings);
+
         if (palette == null) {
             getView().setBackgroundColor(android.graphics.Color.TRANSPARENT);
             tvUserName.setTextColor(android.graphics.Color.WHITE);
+            if (cardSettings != null) cardSettings.setCardBackgroundColor(getResources().getColor(R.color.md_theme_dark_surface));
             return;
         }
 
         getView().setBackgroundColor(palette.surfaceContainer);
         tvUserName.setTextColor(palette.onSurface);
         tvUserEmail.setTextColor(palette.onSurfaceVariant);
+
+        if (cardSettings != null) {
+            cardSettings.setCardBackgroundColor(android.content.res.ColorStateList.valueOf(palette.surfaceContainer));
+            cardSettings.setStrokeColor(android.content.res.ColorStateList.valueOf(palette.divider));
+            cardSettings.setStrokeWidth(1);
+        }
     }
 }

@@ -465,12 +465,41 @@ public class HomeFragment extends BaseTabFragment {
             getView().setBackgroundColor(Color.TRANSPARENT);
             tvGreeting.setTextColor(requireContext().getColor(android.R.color.tab_indicator_text)); // Fallback
             tvUserName.setTextColor(requireContext().getColor(android.R.color.primary_text_dark));
+            
+            searchBar.setNavigationIconTint(getResources().getColor(R.color.text_secondary_default));
+            progressIndicator.setIndicatorColor(getResources().getColor(R.color.md_theme_light_primary));
             return;
         }
 
         getView().setBackgroundColor(palette.surfaceContainer);
         tvGreeting.setTextColor(palette.onSurfaceVariant);
         tvUserName.setTextColor(palette.onSurface);
+        if (tvSectionTitle != null) tvSectionTitle.setTextColor(palette.onSurface);
+
+        // SearchBar & SearchView
+        searchBar.setCardBackgroundColor(android.content.res.ColorStateList.valueOf(palette.primaryContainer));
+        searchBar.setNavigationIconTint(palette.onPrimaryContainer);
+        searchBar.setHintTextColor(palette.onPrimaryContainer);
+        
+        searchView.setBackgroundColor(palette.surfaceContainer);
+        searchView.getToolbar().setBackgroundColor(palette.surfaceContainer);
+        searchView.getEditText().setTextColor(palette.onSurface);
+        searchView.getEditText().setHintTextColor(palette.onSurfaceVariant);
+
+        // Progress Indicator
+        progressIndicator.setIndicatorColor(palette.primaryContainer);
+        
+        // Pull Refresh
+        M3PullRefreshLayout swipeRefresh = getView().findViewById(R.id.swipeRefresh);
+        if (swipeRefresh != null) {
+            swipeRefresh.setIndicatorColor(palette.primaryContainer);
+        }
+
+        // Search Adapter
+        RecyclerView rvHistory = getView().findViewById(R.id.rvSearchHistory);
+        if (rvHistory != null && rvHistory.getAdapter() instanceof SearchHistoryAdapter) {
+            ((SearchHistoryAdapter)rvHistory.getAdapter()).setThemePalette(palette);
+        }
     }
 
     private static class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdapter.VH> {
@@ -480,29 +509,46 @@ public class HomeFragment extends BaseTabFragment {
         }
         private final List<String> items;
         private final HistoryListener listener;
+        private DynamicThemeManager.AppPalette currentPalette;
+
         SearchHistoryAdapter(List<String> items, HistoryListener listener) {
             this.items = items;
             this.listener = listener;
         }
+
+        void setThemePalette(DynamicThemeManager.AppPalette palette) {
+            this.currentPalette = palette;
+            notifyDataSetChanged();
+        }
+
         @NonNull
         @Override public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_history, parent, false);
             return new VH(v);
         }
-        @Override public void onBindViewHolder(@NonNull VH holder, int position) {
-            String q = items.get(position);
-            holder.tvQuery.setText(q);
+
+        @Override public void onBindViewHolder(@NonNull VH holder, int pos) {
+            String q = items.get(pos);
+            holder.tv.setText(q);
             holder.itemView.setOnClickListener(v -> listener.onQueryClick(q));
-            holder.btnClear.setOnClickListener(v -> listener.onDeleteClick(q));
+            holder.btnDelete.setOnClickListener(v -> listener.onDeleteClick(q));
+
+            if (currentPalette != null) {
+                holder.tv.setTextColor(currentPalette.onSurface);
+                holder.btnDelete.setColorFilter(currentPalette.onSurfaceVariant);
+                holder.ivIcon.setColorFilter(currentPalette.onSurfaceVariant);
+            }
         }
+
         @Override public int getItemCount() { return items.size(); }
         static class VH extends RecyclerView.ViewHolder {
-            TextView tvQuery;
-            View btnClear;
+            TextView tv;
+            android.widget.ImageView btnDelete, ivIcon;
             VH(View v) {
                 super(v);
-                tvQuery = v.findViewById(R.id.tvSearchQuery);
-                btnClear = v.findViewById(R.id.btnClearItem);
+                tv = v.findViewById(R.id.tvSearchQuery);
+                btnDelete = v.findViewById(R.id.btnDeleteHistory);
+                ivIcon = v.findViewById(R.id.ivSearchIcon);
             }
         }
     }
