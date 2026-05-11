@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Backward exit: full slide out to right 100% + fade out -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="350"
+    android:duration="250"
     android:interpolator="@android:anim/decelerate_interpolator">
     <translate
         android:fromXDelta="0"
