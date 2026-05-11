@@ -17,8 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.color.DynamicColors;
+import com.example.damonhole.ui.M3PullRefreshLayout;
+import com.google.android.material.button.MaterialButton;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 
@@ -61,18 +61,9 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnSort.setOnClickListener(this::showSortMenu);
 
-        // Setup SwipeRefreshLayout (hide default spinner, use M3 LoadingIndicator)
-        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
-        View refreshIndicator = findViewById(R.id.refreshIndicator);
-        if (swipeRefresh != null) {
-            swipeRefresh.setProgressViewOffset(true, 0, 0);
-            swipeRefresh.setOnRefreshListener(() -> {
-                swipeRefresh.setRefreshing(false);
-                if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
-                loadPlaylistSongs();
-                if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
-            });
-        }
+        // Setup M3 PullRefreshLayout
+        M3PullRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(this::loadPlaylistSongs);
 
         setupRecyclerView();
 

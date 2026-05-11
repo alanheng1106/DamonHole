@@ -19,7 +19,7 @@ import androidx.media3.common.MediaMetadata;
 import androidx.media3.session.MediaController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.damonhole.ui.M3PullRefreshLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -40,6 +40,7 @@ public class PlaylistsFragment extends BaseTabFragment {
     private RecyclerView rvPlaylists;
     private PlaylistAdapter adapter;
     private TextView tvLikedSongsCount;
+    private M3PullRefreshLayout swipeRefresh;
 
     // FAB Menu Components
     private boolean isFabExpanded = false;
@@ -92,16 +93,12 @@ public class PlaylistsFragment extends BaseTabFragment {
         });
 
         // Setup SwipeRefreshLayout (hide default spinner, use M3 LoadingIndicator)
-        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipeRefresh);
-        View refreshIndicator = view.findViewById(R.id.refreshIndicator);
+        swipeRefresh = view.findViewById(R.id.swipeRefresh);
         if (swipeRefresh != null) {
-            swipeRefresh.setProgressViewOffset(true, 0, 0);
             swipeRefresh.setOnRefreshListener(() -> {
-                swipeRefresh.setRefreshing(false);
-                if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
                 loadPlaylists();
                 updateLikedSongsCount();
-                if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
+                swipeRefresh.setRefreshing(false);
             });
         }
 
@@ -206,6 +203,8 @@ public class PlaylistsFragment extends BaseTabFragment {
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(() -> {
                         if (progressIndicator != null) progressIndicator.setVisibility(View.GONE);
+                        swipeRefresh.setRefreshing(false);
+                        adapter.setPlaylists(PlaylistManager.getInstance(requireContext()).getPlaylists());
                         Toast.makeText(requireContext(), R.string.import_failed, Toast.LENGTH_LONG).show();
                     });
                 }

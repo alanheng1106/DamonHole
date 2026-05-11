@@ -96,22 +96,8 @@
             app:wavelength="20dp" />
 
 
-        <!-- M3 Contained Loading Indicator (shown during pull-to-refresh) -->
-        <com.google.android.material.loadingindicator.LoadingIndicator
-            android:id="@+id/refreshIndicator"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone"
-            android:padding="12dp"
-            android:background="@drawable/bg_contained_indicator"
-            android:elevation="2dp"
-            app:indicatorColor="?attr/colorPrimary" />
-
-        <!-- SwipeRefreshLayout for pull-to-refresh -->
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <!-- M3 Pull to Refresh -->
+        <com.example.damonhole.ui.M3PullRefreshLayout
             android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -128,7 +114,7 @@
                 android:scrollbarStyle="outsideOverlay"
                 android:fadeScrollbars="true" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.example.damonhole.ui.M3PullRefreshLayout>
 
         <!-- M3 Tonal button -->
         <com.google.android.material.button.MaterialButton

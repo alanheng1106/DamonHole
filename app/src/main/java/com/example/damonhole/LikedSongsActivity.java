@@ -17,6 +17,7 @@ import androidx.media3.session.SessionToken;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.damonhole.ui.M3PullRefreshLayout;
 
 import com.google.android.material.color.DynamicColors;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -59,17 +60,10 @@ public class LikedSongsActivity extends AppCompatActivity {
         loadingOverlay = findViewById(R.id.loadingOverlay);
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
 
-        // Setup SwipeRefreshLayout (hide default spinner, use M3 LoadingIndicator)
-        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
-        View refreshIndicator = findViewById(R.id.refreshIndicator);
+        // Setup M3 PullRefreshLayout
+        M3PullRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
         if (swipeRefresh != null) {
-            swipeRefresh.setProgressViewOffset(true, 0, 0);
-            swipeRefresh.setOnRefreshListener(() -> {
-                swipeRefresh.setRefreshing(false);
-                if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
-                refreshList();
-                if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
-            });
+            swipeRefresh.setOnRefreshListener(this::refreshList);
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -21,6 +21,8 @@ import androidx.media3.session.MediaController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.damonhole.ui.M3PullRefreshLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
 
@@ -58,8 +60,7 @@ public class HomeFragment extends BaseTabFragment {
     private PlaylistManager playlistManager;
     private LikedSongsManager likedManager;
     private View searchLoadingIndicator;
-    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh;
-    private View refreshIndicator;
+    private M3PullRefreshLayout swipeRefresh;
 
     private SearchHistoryAdapter historyAdapter;
     private final List<String> searchHistory = new ArrayList<>();
@@ -96,13 +97,9 @@ public class HomeFragment extends BaseTabFragment {
         btnCreatePlaylist = view.findViewById(R.id.btnCreatePlaylist);
         searchLoadingIndicator = view.findViewById(R.id.progressIndicator);
 
-        // Setup SwipeRefreshLayout for pull-to-refresh (hide default spinner, use refreshIndicator)
+        // Setup M3 PullRefreshLayout
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
-        refreshIndicator = view.findViewById(R.id.refreshIndicator);
-        swipeRefresh.setProgressViewOffset(true, 0, 0); // Hide default spinner off-screen
         swipeRefresh.setOnRefreshListener(() -> {
-            swipeRefresh.setRefreshing(false); // Immediately hide default spinner
-            if (refreshIndicator != null) refreshIndicator.setVisibility(View.VISIBLE);
             loadRecentHits(true); // true means it's a refresh, don't show the wave indicator
         });
 
@@ -251,7 +248,7 @@ public class HomeFragment extends BaseTabFragment {
             if (getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
                     if (searchLoadingIndicator != null) searchLoadingIndicator.setVisibility(View.GONE);
-                    if (refreshIndicator != null) refreshIndicator.setVisibility(View.GONE);
+                    swipeRefresh.setRefreshing(false);
                     if (!results.isEmpty()) {
                         tvSectionTitle.setVisibility(View.VISIBLE);
                         tvSectionTitle.setText(getString(R.string.recent_hits));
