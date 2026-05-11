@@ -63,6 +63,10 @@ public class NowPlayingFragment extends BaseTabFragment {
             updateMetadataUI();
         }
         @Override
+        public void onMediaMetadataChanged(MediaMetadata mediaMetadata) {
+            updateMetadataUI();
+        }
+        @Override
         public void onIsPlayingChanged(boolean isPlaying) {
             updatePlayPauseIcon(isPlaying);
         }
@@ -213,6 +217,14 @@ public class NowPlayingFragment extends BaseTabFragment {
 
         btnQueue.setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), QueueActivity.class)));
+
+        // If controller is already ready in Activity, initialize UI now
+        MediaController controller = getMusicController();
+        if (controller != null) {
+            onMediaControllerReady(controller);
+        }
+        
+        handler.post(seekUpdater);
     }
 
     @Override
@@ -238,18 +250,12 @@ public class NowPlayingFragment extends BaseTabFragment {
     private void updateMetadataUI() {
         MediaController controller = getMusicController();
         if (controller == null || controller.getCurrentMediaItem() == null) return;
-        MediaMetadata meta = controller.getCurrentMediaItem().mediaMetadata;
+        MediaItem item = controller.getCurrentMediaItem();
+        MediaMetadata meta = item.mediaMetadata;
 
-        seekSlider.setValue(0);
-        seekSlider.setValueTo(100); 
-
-        currentTitle  = meta.title  != null ? meta.title.toString()  : getString(R.string.app_name);
-        currentAuthor = meta.artist != null ? meta.artist.toString() : getString(R.string.music_fan);
-
-        try {
-            String id = controller.getCurrentMediaItem().mediaId;
-            currentVideoId = (id != null && !id.isEmpty()) ? id : null;
-        } catch (Exception ignored) {}
+        currentTitle  = (meta.title  != null && meta.title.length() > 0) ? meta.title.toString()  : getString(R.string.unknown_title);
+        currentAuthor = (meta.artist != null && meta.artist.length() > 0) ? meta.artist.toString() : getString(R.string.unknown_artist);
+        currentVideoId = item.mediaId;
 
         tvTitle.setText(currentTitle);
         tvArtist.setText(currentAuthor);
@@ -258,10 +264,20 @@ public class NowPlayingFragment extends BaseTabFragment {
             updateLikeButton(likedManager.isLiked(currentVideoId));
         }
 
+        // Reset seek slider
+        seekSlider.setValue(0);
+        long duration = controller.getDuration();
+        if (duration > 0) {
+            seekSlider.setValueTo(duration);
+            tvDuration.setText(formatMs(duration));
+        }
+
         if (meta.artworkUri != null) {
             Glide.with(this)
                 .asBitmap()
                 .load(meta.artworkUri.toString())
+                .placeholder(R.drawable.ic_music_note)
+                .error(R.drawable.ic_music_note)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -271,8 +287,13 @@ public class NowPlayingFragment extends BaseTabFragment {
                         }
                     }
                     @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {}
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        if (isAdded()) ivArtwork.setImageResource(R.drawable.ic_music_note);
+                    }
                 });
+        } else {
+            ivArtwork.setImageResource(R.drawable.ic_music_note);
+            rootLayout.setBackgroundColor(Color.parseColor("#121212"));
         }
     }
 
