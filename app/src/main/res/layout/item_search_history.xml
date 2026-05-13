@@ -12,6 +12,7 @@
     android:background="?attr/selectableItemBackground">
 
     <ImageView
+        android:id="@+id/ivSearchIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/ic_history"

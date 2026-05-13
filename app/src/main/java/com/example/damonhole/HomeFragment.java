@@ -548,7 +548,7 @@ public class HomeFragment extends BaseTabFragment {
 
             if (currentPalette != null) {
                 holder.tv.setTextColor(currentPalette.onSurface);
-                holder.btnDelete.setColorFilter(currentPalette.onSurfaceVariant);
+                holder.btnDelete.setIconTint(android.content.res.ColorStateList.valueOf(currentPalette.onSurfaceVariant));
                 holder.ivIcon.setColorFilter(currentPalette.onSurfaceVariant);
             }
         }
@@ -556,11 +556,12 @@ public class HomeFragment extends BaseTabFragment {
         @Override public int getItemCount() { return items.size(); }
         static class VH extends RecyclerView.ViewHolder {
             TextView tv;
-            android.widget.ImageView btnDelete, ivIcon;
+            android.widget.ImageView ivIcon;
+            com.google.android.material.button.MaterialButton btnDelete;
             VH(View v) {
                 super(v);
                 tv = v.findViewById(R.id.tvSearchQuery);
-                btnDelete = v.findViewById(R.id.btnDeleteHistory);
+                btnDelete = v.findViewById(R.id.btnClearItem);
                 ivIcon = v.findViewById(R.id.ivSearchIcon);
             }
         }
